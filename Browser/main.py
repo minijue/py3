@@ -1,7 +1,9 @@
-from selenium import webdriver
+import wx
 
-import bs
+import guiform
 
-# b = webdriver.Chrome(executable_path=r'C:\Users\jue95\AppData\Local\Google\Chrome\Application\chromedriver.exe') # for Windows
-b = webdriver.Chrome()
-bs.openweb(b)
+if __name__ == '__main__':
+    app = wx.App()
+    frame = guiform.MainFrame(None)
+    frame.Show(True)
+    app.MainLoop()
