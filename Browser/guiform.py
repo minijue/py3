@@ -46,6 +46,11 @@ class MannulFrame(wx.Frame):
         self.buttonCancel = wx.Button(panel, -1, u"取消", pos=(190, 136))
         self.Bind(wx.EVT_BUTTON, self.onButtonCancel, self.buttonCancel)
 
+        self.Bind(wx.EVT_CLOSE, self.onClose)
+
+    def onClose(self, event):
+        self.Parent.Destroy()
+
     def onButtonOK(self, event):
         txt = self.text.GetValue()
         numl = toList.tonumlist(txt)
