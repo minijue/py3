@@ -64,6 +64,12 @@ class AutoWeb:
             continue
         return th.listOfClasses
 
+    def openlink(self, ahref):
+        if ahref is not None:
+            ahref.click()
+        else:
+            self.__browser.back()
+
     @property  # 浏览器属性，用于在不同模块控制浏览器
     def browser(self):
         return self.__browser
@@ -88,7 +94,7 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
             tr_list = tbl.find_elements_by_tag_name('tr')  # 所有行，包括标题栏和小班
 
             # for trx in tr_list:
-            i = 1
+            i = 1  # 跳过标题栏
             while i < len(tr_list):
                 trx = tr_list[i]
                 td_list = trx.find_elements_by_tag_name('td')
@@ -100,7 +106,7 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
                             ctbl = trx.find_element_by_tag_name('tbody')
                             ctr_list = ctbl.find_elements_by_tag_name('tr')
                             # for ctrx in ctr_list:
-                            j = 1
+                            j = 1  # 跳过标题栏
                             while j < len(ctr_list):
                                 ctrx = ctr_list[j]
                                 cattr = ctrx.get_attribute('class')
