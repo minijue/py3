@@ -87,7 +87,10 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
             tbl = self.__browser.find_element_by_id('task-tab')
             tr_list = tbl.find_elements_by_tag_name('tr')  # 所有行，包括标题栏和小班
 
-            for trx in tr_list:
+            # for trx in tr_list:
+            i = 1
+            while i < len(tr_list):
+                trx = tr_list[i]
                 td_list = trx.find_elements_by_tag_name('td')
                 if td_list is not None and len(td_list) > 1:  # 数据栏，标题栏不含td
                     attr = trx.get_attribute('class')
@@ -96,7 +99,10 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
                         if key != '' and (smallc in attr):  # 小班编号相同
                             ctbl = trx.find_element_by_tag_name('tbody')
                             ctr_list = ctbl.find_elements_by_tag_name('tr')
-                            for ctrx in ctr_list:
+                            # for ctrx in ctr_list:
+                            j = 1
+                            while j < len(ctr_list):
+                                ctrx = ctr_list[j]
                                 cattr = ctrx.get_attribute('class')
                                 if (cattr is not None) and (cattr != ''):
                                     ctd_list = ctrx.find_elements_by_tag_name('td')
@@ -113,15 +119,19 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
                                     tdl.append(exam)
                                     vlist[ctd_list[1].text] = tdl
 
+                                j = j + 1
+
                             self.__clslst[key] = vlist
+                            i = i + j
                     elif attr == '':  # 教学班级，点击'分班录入'打开小班表格
                         key = td_list[1].text
                         expand = td_list[7].find_element_by_tag_name('a')
                         expand.click()
 
                         smallc = expand.get_attribute('data')  # 获取小班编号
-                    else:  # 跳过标题栏
-                        continue
+                    # else:  # 跳过标题栏
+                    #     continue
+                i = i + 1
             self.__finish = True
         except:
             print("AutoWeb.getclasses: element not found.")
