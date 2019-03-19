@@ -15,8 +15,8 @@ class MainFrame(wx.Frame):
 
         panel = wx.Panel(self, -1)
         self.label = wx.StaticText(panel, -1, u'请选择输入模式：', pos=(30, 30))
-        self.raido1 = wx.RadioButton(panel, -1, u'从Excel文件导入', pos=(100, 60))
-        self.raido2 = wx.RadioButton(panel, -1, u'手动粘贴', pos=(100, 90))
+        self.radio1 = wx.RadioButton(panel, -1, u'从Excel文件导入', pos=(100, 60))
+        self.radio2 = wx.RadioButton(panel, -1, u'手动粘贴', pos=(100, 90))
 
         self.buttonOK = wx.Button(panel, -1, u"确定", pos=(90, 136))
         self.Bind(wx.EVT_BUTTON, self.onButtonOK, self.buttonOK)
@@ -31,7 +31,7 @@ class MainFrame(wx.Frame):
     def onButtonOK(self, event):
         self.Show(False)
 
-        if self.raido1.GetValue():
+        if self.radio1.GetValue():
             # To Do: 自动从 Excel 文件导入
             print('hello')
         else:
@@ -70,8 +70,9 @@ class MannulFrame(wx.Frame):
         self.combo3 = wx.ComboBox(panel, -1, value=u'选择小班，打开成绩录入页面', choices=[], pos=(130, 96), size=(290, 26))
         self.Bind(wx.EVT_COMBOBOX, self.onSClassSelected, self.combo3)
 
-        self.raido1 = wx.RadioButton(panel, -1, u'平时成绩', pos=(130, 140))
-        self.raido2 = wx.RadioButton(panel, -1, u'考核成绩', pos=(230, 140))
+        self.radio1 = wx.RadioButton(panel, -1, u'平时成绩', pos=(130, 140))
+        self.radio1.SetValue(True)
+        self.radio2 = wx.RadioButton(panel, -1, u'考核成绩', pos=(230, 140))
 
         self.Bind(wx.EVT_CLOSE, self.onClose)
 
@@ -113,20 +114,23 @@ class MannulFrame(wx.Frame):
             norm = self.sclass[sc][0]
             exam = self.sclass[sc][1]
             finished = False
-            if norm == exam:
-                wx.MessageBox(u'录入权限已关闭，仅可查看', u'！提示！')
-                finished = True
+            if norm is None:
+                wx.MessageBox(u'录入权限尚未开放', u'提示！')
+            else:
+                if norm == exam:
+                    wx.MessageBox(u'录入已完成，权限已关闭，仅可查看', u'提示！')
+                    finished = True
 
-            link = exam
-            if self.raido1.GetValue():
-                link = norm
+                self.Show(False)
 
-            self.Parent.aw.openlink(ahref=link)
+                fr = PasteFrame(self, finished)
+                fr.Show(True)
 
-            self.Show(False)
+                link = exam
+                if self.radio1.GetValue():
+                    link = norm
 
-            fr = PasteFrame(self, finished)
-            fr.Show(True)
+                self.Parent.aw.openlink(ahref=link)
 
 
 class PasteFrame(wx.Frame):
