@@ -11,8 +11,8 @@ n = int(input('Please input the number:'))
 if n > 0:
     t = time.localtime()
     # 以时间和次数组合成文件名
-    filename = '{:4d}-{:02d}-{:02d} {:02d}:{:02d}:{:02d}({}).pdf'.format(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour,
-                                                                         t.tm_min, t.tm_sec, n)
+    filename = '{:4d}-{:02d}-{:02d} {:02d}{:02d}{:02d}({}).pdf'.format(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour,
+                                                                       t.tm_min, t.tm_sec, n)
     pdf = SimpleDocTemplate(filename,
                             pagesize=(A4[0], A4[1]),
                             rightMargin=20,
