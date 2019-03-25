@@ -11,7 +11,7 @@ def ranplus():
     a = 0
     b = 0
     global n0
-    start = 1 if n0 > 5 else 0  # 有0的算式不能超过5个
+    start = 1 if n0 > 3 else 0  # 有0的算式不能超过3个
     while a == b == 0:  # 都是0无意义
         a = random.randint(start, 99)
         b = random.randint(start, 99)
@@ -26,7 +26,7 @@ def ransub():
     a = 0
     b = 0
     global n0, ns
-    start = 1 if n0 > 5 else 0  # 有0的算式不能超过5个
+    start = 1 if n0 > 3 else 0  # 有0的算式不能超过3个
     while a == b and (ns > 2 or b == 0):  # 操作数都为0或者相同的次数超过限制
         a = random.randint(start, 100)
         b = random.randint(start, a)
@@ -41,7 +41,7 @@ def ranmul():
     a = 0
     b = 0
     global n0
-    start = 1 if n0 > 5 else 0  # 有0的算式不能超过5个
+    start = 1 if n0 > 3 else 0  # 有0的算式不能超过3个
     while a == b == 0:  # 都是0无意义
         a = random.randint(start, 9)
         b = random.randint(start, 9)
@@ -54,7 +54,7 @@ def randivintbl():
     a = 0
     b = 0
     global n0, ns
-    start = 1 if n0 > 5 else 0  # 有0的算式不能超过5个
+    start = 1 if n0 > 3 else 0  # 有0的算式不能超过3个
     while a == b and (ns > 2 or a == 0):  # 操作数都为0或者相同的次数超过限制
         a = random.randint(1, 9)
         b = random.randint(start, 9)
