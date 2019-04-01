@@ -26,7 +26,10 @@ if n > 0:
                 lambda: calfunc.randivintbl()]  # 用lambda表达式作为列表元素
     for i in range(n):
         tp = random.randint(0, 3)
-        t.add(calfuncs[tp]())
+        exp = calfuncs[tp]()
+        while len(elements) > 0 and exp in elements[-1]:  # 相邻行去重
+            exp = calfuncs[tp]()
+        t.add(exp)
 
         if len(t) % 5 == 0:
             elements.append(list(t))
