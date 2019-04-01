@@ -22,19 +22,12 @@ if n > 0:
     t = set()
     elements = []
 
+    calfuncs = [lambda: calfunc.ranplus(), lambda: calfunc.ransub(), lambda: calfunc.ranmul(),
+                lambda: calfunc.randivintbl()]  # 用lambda表达式作为列表元素
     for i in range(n):
-        tp = random.randint(1, 4)
-        if tp == 1:  # plus
-            t.add(calfunc.ranplus())
-        elif tp == 2:  # subtract
-            t.add(calfunc.ransub())
-        elif tp == 3:  # multiply
-            t.add(calfunc.ranmul())
-        elif tp == 4:  # divide
-            t.add(calfunc.randivintbl())
-        else:
-            print('error')
-            break
+        tp = random.randint(0, 3)
+        t.add(calfuncs[tp]())
+
         if len(t) % 5 == 0:
             elements.append(list(t))
             t.clear()

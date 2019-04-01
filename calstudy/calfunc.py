@@ -11,12 +11,10 @@ def ranplus():
     a = 0
     b = 0
     global n0
-    start = 1 if n0 > 3 else 0  # 有0的算式不能超过3个
-    while a == b == 0:  # 都是0无意义
+    start = 1 if n0 > 3 else 0  # 有0的算式不能超过3
+    while a == b == 0 or a + b > 100:
         a = random.randint(start, 99)
         b = random.randint(start, 99)
-        while a + b > 100:  # 和不大于100
-            b = random.randint(start, 99)
     if a == 0 or b == 0:
         n0 += 1
     return f'{a} + {b} ='
