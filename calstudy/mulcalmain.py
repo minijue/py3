@@ -1,17 +1,16 @@
-import random
 import time
 
 from reportlab.lib import colors
 from reportlab.lib.pagesizes import A4
 from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 
-import calfunc
+from mulcalfunc import multical
 
 n = int(input('Please input the number:'))
 if n > 0:
     t = time.localtime()
     # 以时间和次数组合成文件名
-    filename = 's{:4d}-{:02d}-{:02d} {:02d}{:02d}{:02d}({}).pdf'.format(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour,
+    filename = 'm{:4d}-{:02d}-{:02d} {:02d}{:02d}{:02d}({}).pdf'.format(t.tm_year, t.tm_mon, t.tm_mday, t.tm_hour,
                                                                         t.tm_min, t.tm_sec, n)
     pdf = SimpleDocTemplate(filename,
                             pagesize=(A4[0], A4[1]),
@@ -21,21 +20,17 @@ if n > 0:
                             bottomMargin=20)
     t = set()
     elements = []
-
-    calfuncs = [lambda: calfunc.ranplus(), lambda: calfunc.ransub(), lambda: calfunc.ranmul(),
-                lambda: calfunc.randivintbl()]  # 用lambda表达式作为列表元素
     for i in range(n):
-        tp = random.randint(0, 3)
-        exp = calfuncs[tp]()
+        exp = multical()
         while len(elements) > 0 and exp in elements[-1]:  # 相邻行去重
-            exp = calfuncs[tp]()
+            exp = multical()
         t.add(exp)
 
-        if len(t) % 5 == 0:
+        if len(t) % 4 == 0:
             elements.append(list(t))
             t.clear()
 
-    etable = Table(elements, rowHeights=38, colWidths=110)
+    etable = Table(elements, rowHeights=38, colWidths=140)
     etable.setStyle(
         TableStyle([
             ('FONTSIZE', (0, 0), (-1, -1), 14),  # 字体大小

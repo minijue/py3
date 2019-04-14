@@ -7,10 +7,10 @@ if __name__ == '__main__':
 n0 = 0  # 统计有0算式的数量
 ns = 0  # 减法和除法中统计两个操作数相等的数量
 
+
 def ranplus():
-    a = 0
-    b = 0
     global n0
+    a, b = 0, 0
     start = 1 if n0 > 3 else 0  # 有0的算式不能超过3
     while a == b == 0 or a + b > 100:
         a = random.randint(start, 99)
@@ -21,8 +21,7 @@ def ranplus():
 
 
 def ransub():
-    a = 0
-    b = 0
+    a, b = 0, 0
     global n0, ns
     start = 1 if n0 > 3 else 0  # 有0的算式不能超过3个
     while a == b and (ns > 2 or b == 0):  # 操作数都为0或者相同的次数超过限制
@@ -36,8 +35,7 @@ def ransub():
 
 
 def ranmul():
-    a = 0
-    b = 0
+    a, b = 0, 0
     global n0
     start = 1 if n0 > 3 else 0  # 有0的算式不能超过3个
     while a == b == 0:  # 都是0无意义
@@ -49,8 +47,7 @@ def ranmul():
 
 
 def randivintbl():
-    a = 0
-    b = 0
+    a, b = 0, 0
     global n0, ns
     start = 1 if n0 > 3 else 0  # 有0的算式不能超过3个
     while a == b and (ns > 2 or a == 0):  # 操作数都为0或者相同的次数超过限制
@@ -61,3 +58,4 @@ def randivintbl():
     if a == b:
         ns += 1
     return f'{a * b:} ÷ {a} ='
+
