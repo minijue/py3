@@ -21,14 +21,16 @@ if n > 0:
                             bottomMargin=20)
     t = set()
     elements = []
+    counts = [0] * 4
 
-    calfuncs = [lambda: calfunc.ranplus(), lambda: calfunc.ransub(), lambda: calfunc.ranmul(),
-                lambda: calfunc.randivintbl()]  # 用lambda表达式作为列表元素
+    calfuncs = [lambda x: calfunc.ranplus(x), lambda x: calfunc.ransub(x), lambda x: calfunc.ranmul(x),
+                lambda x: calfunc.randivintbl(x)]  # 用lambda表达式作为列表元素
     for i in range(n):
         tp = random.randint(0, 3)
-        exp = calfuncs[tp]()
+        counts[tp] += 1
+        exp = calfuncs[tp](n * 0.03)
         while len(elements) > 0 and exp in elements[-1]:  # 相邻行去重
-            exp = calfuncs[tp]()
+            exp = calfuncs[tp](n * 0.03)
         t.add(exp)
 
         if len(t) % 5 == 0:
@@ -46,3 +48,5 @@ if n > 0:
     )
     contents = [etable]
     pdf.build(contents)
+
+    print(f'生成成功，其中加法 {counts[0]} 题，减法 {counts[1]} 题，乘法 {counts[2]} 题，除法 {counts[3]} 题。')
