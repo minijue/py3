@@ -124,7 +124,7 @@ def multical():
         return f'{a1} {cs[c1]} {a2} {cs[c2]} {a3} ='.replace('*', '×').replace('//', '÷')
     elif eb == 1 and c1 // 2 < c2 // 2:
         return f'({a1} {cs[c1]} {a2}) {cs[c2]} {a3} ='.replace('*', '×').replace('//', '÷')
-    elif eb == 2:
+    elif eb == 2 and c1 // 2 >= c2 // 2:
         return f'{a1} {cs[c1]} ({a2} {cs[c2]} {a3}) ='.replace('*', '×').replace('//', '÷')
     else:
         return f'{a1} {cs[c1]} {a2} {cs[c2]} {a3} ='.replace('*', '×').replace('//', '÷')
