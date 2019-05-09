@@ -120,8 +120,6 @@ def multical():
                 else:
                     a3 = random.randint(1, a if a < 9 else 9)
 
-    # if c1 == c2 == 2 or c1 == c2 == 4:
-    #     return f'{a1} {cs[c1]} {a2} {cs[c2]} {a3} ='
     if eb == 1 and (c1 // 2) < (c2 // 2):
         return f'({a1} {cs[c1]} {a2}) {cs[c2]} {a3} ='
     elif eb == 2 and (c1 > c2 or (c2 == c1 and c1 % 2 == 1)):
