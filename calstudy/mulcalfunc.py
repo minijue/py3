@@ -5,6 +5,7 @@ if __name__ == '__main__':
     exit(-1)
 
 
+# 获得第一步计算的操作数和结果
 def step1(c1):
     if c1 == 2:
         a1 = random.randint(1, 99)
@@ -34,15 +35,15 @@ def multical():
 
     a1, a2, a3 = 0, 0, 0
 
-    if eb == 2 or (eb == 0 and ((c2 // 2) > (c1 // 2))):
+    if eb == 2 or (eb == 0 and ((c2 // 2) > (c1 // 2))):  # 先计算后面的算式
         a2, a3, a = step1(c2)
 
-        if c1 == 2:
+        if c1 == 2:  # 前面为加法
             a1 = random.randint(1, 100 - a)
-        elif c1 == 3:
+        elif c1 == 3:  # 前面为减法
             a1 = random.randint(a, 100)
-        elif c1 == 4:
-            while a > 9:
+        elif c1 == 4:  # 前面为乘法
+            while a > 9:  # 乘数不能大于9，重新生成后面的算式
                 if c2 == 2:
                     a2 = random.randint(1, 9)
                     a3 = random.randint(0, 9 - a2)
@@ -58,8 +59,8 @@ def multical():
                 else:
                     pass
             a1 = random.randint(1, 9)
-        else:
-            while a > 9 or a == 0:
+        else:  # 前面为除法
+            while a > 9 or a == 0:  # 除数不能大于9或者等于0
                 if c2 == 2:
                     a2 = random.randint(1, 9)
                     a3 = random.randint(0, 9 - a1)
@@ -75,7 +76,7 @@ def multical():
                 else:
                     pass
             a1 = a * random.randint(1, 9)
-    else:
+    else:  # 先计算前面的算式
         a1, a2, a = step1(c1)
 
         if c2 == 2:
