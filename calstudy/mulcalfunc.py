@@ -30,11 +30,11 @@ def multical():
     c2 = random.randint(2, 5)
     eb = random.randint(0, 2)
 
-    cs = ['', '', '+', '-', '*', '//']
+    cs = ['', '', '+', '-', '×', '÷']
 
     a1, a2, a3 = 0, 0, 0
 
-    if eb == 2 or (eb == 0 and (c2 // 2 > c1 // 2)):
+    if eb == 2 or (eb == 0 and ((c2 // 2) > (c1 // 2))):
         a2, a3, a = step1(c2)
 
         if c1 == 2:
@@ -101,7 +101,7 @@ def multical():
             a3 = random.randint(1, 9)
         else:
             a3 = random.randint(1, 9)
-            while a % a3 > 0 or a // a3 > 9:
+            while (a % a3) > 0 or (a // a3) > 9:
                 b = a3 * random.randint(1, 9)
                 if c1 == 2:
                     a1 = random.randint(0, b)
@@ -112,7 +112,7 @@ def multical():
                     a2 = a1 - b
                     a = a1 - a2
                 elif c1 == 4:
-                    while b % a1 > 0 or b // a1 > 9:
+                    while (b % a1) > 0 or (b // a1) > 9:
                         a1 = random.randint(1, b)
                     a2 = b // a1
                     a = a1 * a2
@@ -120,11 +120,11 @@ def multical():
                 else:
                     a3 = random.randint(1, a if a < 9 else 9)
 
-    if c1 == c2 == 2 or c1 == c2 == 4:
-        return f'{a1} {cs[c1]} {a2} {cs[c2]} {a3} ='.replace('*', '×').replace('//', '÷')
-    elif eb == 1 and c1 // 2 < c2 // 2:
-        return f'({a1} {cs[c1]} {a2}) {cs[c2]} {a3} ='.replace('*', '×').replace('//', '÷')
-    elif eb == 2 and c1 // 2 >= c2 // 2:
-        return f'{a1} {cs[c1]} ({a2} {cs[c2]} {a3}) ='.replace('*', '×').replace('//', '÷')
+    # if c1 == c2 == 2 or c1 == c2 == 4:
+    #     return f'{a1} {cs[c1]} {a2} {cs[c2]} {a3} ='
+    if eb == 1 and (c1 // 2) < (c2 // 2):
+        return f'({a1} {cs[c1]} {a2}) {cs[c2]} {a3} ='
+    elif eb == 2 and (c1 > c2 or (c2 == c1 and c1 % 2 == 1)):
+        return f'{a1} {cs[c1]} ({a2} {cs[c2]} {a3}) ='
     else:
-        return f'{a1} {cs[c1]} {a2} {cs[c2]} {a3} ='.replace('*', '×').replace('//', '÷')
+        return f'{a1} {cs[c1]} {a2} {cs[c2]} {a3} ='

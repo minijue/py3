@@ -1,7 +1,5 @@
 import wx
-
 import bs
-import toList
 
 
 class MainFrame(wx.Frame):
