@@ -8,7 +8,7 @@ from reportlab.platypus import SimpleDocTemplate, Table, TableStyle
 
 from mulcalfunc import multical
 
-pdfmetrics.registerFont(TTFont('simfang', 'simfang.ttf'))
+pdfmetrics.registerFont(TTFont('cambria', 'cambria.ttc'))
 n = int(input('Please input the number:'))
 if n > 0:
     t = time.localtime()
@@ -36,11 +36,11 @@ if n > 0:
     etable = Table(elements, rowHeights=38, colWidths=140)
     etable.setStyle(
         TableStyle([
-            ('FONTNAME', (0, 0), (-1, -1), 'simfang'),  # 字体
-            ('FONTSIZE', (0, 0), (-1, -1), 14),  # 字体大小
+            ('FONTNAME', (0, 0), (-1, -1), 'cambria'),  # 字体
+            ('FONTSIZE', (0, 0), (-1, -1), 15),  # 字体大小
             ('ALIGN', (-1, 0), (-2, 0), 'LEFT'),  # 对齐
-            ('TEXTCOLOR', (0, 1), (-2, -1), colors.black),  # 设置表格内文字颜色
-            ('GRID', (0, 0), (0, 0), 0, colors.white),  # 设置表格框线
+            ('TEXTCOLOR', (0, 0), (0, 0), colors.black),  # 设置表格内文字颜色
+            ('GRID', (-1, 0), (-2, 0), 0, colors.white),  # 设置表格框线
         ])
     )
     contents = [etable]
