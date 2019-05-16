@@ -27,7 +27,7 @@ if n > 0:
     counts = [0] * 4
 
     calfuncs = [lambda x: calfunc.ranplus(x), lambda x: calfunc.ransub(x), lambda x: calfunc.ranmul(x),
-                lambda x: calfunc.randivintbl(x)]  # 用lambda表达式作为列表元素
+                lambda x: calfunc.randiv(x)]  # 用lambda表达式作为列表元素
     for i in range(n):
         tp = random.randint(0, 3)
         counts[tp] += 1

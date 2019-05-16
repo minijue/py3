@@ -43,7 +43,7 @@ def ranmul(t):
     return f'{a} × {b} ='
 
 
-def randivintbl(t):
+def randiv(t):
     global n0
     a = random.randint(1, 9)
     b = random.randint(0, 9)
@@ -52,4 +52,6 @@ def randivintbl(t):
         b = random.randint(0, 9)
     if a == 1 or b < 2:
         n0 += 1
-    return f'{a * b} ÷ {a} ='
+    mod = [0] * (a - 1) + list(range(0, a-1))   # 随机选择一个余数，提高 0 的概率
+    c = a * b + (random.choice(mod) if len(mod) > 0 else 0)
+    return f'{c} ÷ {a} ='
