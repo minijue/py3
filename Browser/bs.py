@@ -71,6 +71,17 @@ class AutoWeb:
         else:
             self.__browser.back()
 
+    def executejs(strlst, isnorm = True):
+        # 将成绩列表整理成逗号分隔的字符串
+        slst = []
+        if ',' not in strlst:            
+            slst = strlst.split()
+            strlst = ','.join(slst)
+
+            tablename = 'listCommonScoreInput' if isnorm else 'listScoreInput'
+            strjs = f"var arr = new Array({strlst})\nfor (var i=0;i<arr.length;i++)\n{\n      var arrname = '{tablename}['+i+'].commonScore'\n document.getElementsByName(arrname)[0].value = arr[i]\n}"  
+       
+
     @property  # 浏览器属性，用于在不同模块控制浏览器
     def browser(self):
         return self.__browser

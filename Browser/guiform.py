@@ -31,7 +31,7 @@ class MainFrame(wx.Frame):
 
         if self.radio1.GetValue():
             # To Do: 自动从 Excel 文件导入
-            print('hello')
+            pass
         else:
             # 手动
             tlst = self.aw.getterms()
@@ -160,6 +160,7 @@ class PasteFrame(wx.Frame):
         txt = self.text.GetValue()
         numl = toList.tonumlist(txt)
         # To Do: 调用JS脚本，完成录入
+
 
     def onButtonCancel(self, event):
         self.root.aw.openlink(None)
