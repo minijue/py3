@@ -1,4 +1,5 @@
 import wx
+
 import bs
 
 
@@ -112,21 +113,25 @@ class MannulFrame(wx.Frame):
             norm = self.sclass[sc][0]
             exam = self.sclass[sc][1]
             finished = False
-            if norm is None:
+            if (norm == exam) and (norm is None):
                 wx.MessageBox(u'录入权限尚未开放', u'提示！')
             else:
                 if norm == exam:
                     wx.MessageBox(u'录入已完成，权限已关闭，仅可查看', u'提示！')
                     finished = True
 
+                if norm is None:
+                    self.radio2.SetValue(True)
+
+                if exam is None:
+                    self.radio1.SetValue(True)
+
+                link = exam if self.radio2.GetValue() else norm
+
                 self.Show(False)
 
                 fr = PasteFrame(self, finished)
                 fr.Show(True)
-
-                link = exam
-                if self.radio1.GetValue():
-                    link = norm
 
                 self.Parent.aw.openlink(ahref=link)
 
@@ -141,7 +146,11 @@ class PasteFrame(wx.Frame):
 
         panel = wx.Panel(self, -1)
 
-        self.label = wx.StaticText(panel, -1, u'请将成绩列表复制后粘贴至下列文本框：', pos=(30, 25))
+        self.Parent.__class__ = MannulFrame
+        isnorm = self.Parent.radio1.GetValue()
+
+        lbltxt = u'请将 ' + (u'平时' if isnorm else u'考核') + u'成绩 列表复制后粘贴至下列文本框：'
+        self.label = wx.StaticText(panel, -1, lbltxt, pos=(30, 25))
         self.text = wx.TextCtrl(panel, -1, "", pos=(30, 55), size=(390, 70), style=wx.TE_MULTILINE)
 
         self.buttonOK = wx.Button(panel, -1, u"确定", pos=(130, 140))
@@ -158,9 +167,8 @@ class PasteFrame(wx.Frame):
 
     def onButtonOK(self, event):
         txt = self.text.GetValue()
-        numl = toList.tonumlist(txt)
         # To Do: 调用JS脚本，完成录入
-
+        self.root.aw.executejs(txt)
 
     def onButtonCancel(self, event):
         self.root.aw.openlink(None)

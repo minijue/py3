@@ -71,16 +71,17 @@ class AutoWeb:
         else:
             self.__browser.back()
 
-    def executejs(strlst, isnorm = True):
+    def executejs(self, strlst, isnorm=True):
         # 将成绩列表整理成逗号分隔的字符串
-        slst = []
-        if ',' not in strlst:            
+        if ',' not in strlst:
             slst = strlst.split()
             strlst = ','.join(slst)
 
-            tablename = 'listCommonScoreInput' if isnorm else 'listScoreInput'
-            strjs = f"var arr = new Array({strlst})\nfor (var i=0;i<arr.length;i++)\n{\n      var arrname = '{tablename}['+i+'].commonScore'\n document.getElementsByName(arrname)[0].value = arr[i]\n}"  
-       
+        tablename = 'listCommonScoreInput' if isnorm else 'listScoreInput'
+        strjs = "var arr = new Array(strlst)\nfor (var i=0;i<arr.length;i++)\n{\n      var arrname = 'tablename['+i+'].commonScore'\n document.getElementsByName(arrname)[0].value = arr[i]\n}"
+        strjs = strjs.replace('strlst', strlst).replace('tablename', tablename)
+
+        self.__browser.execute_script(strjs)
 
     @property  # 浏览器属性，用于在不同模块控制浏览器
     def browser(self):
@@ -129,11 +130,11 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
 
                                     if cattr == 'finish':  # 录入已完成，权限已关闭，仅可查看
                                         norm = exam = ctd_list[5].find_element_by_tag_name('a')
-                                    elif cattr == 'input':  # 录入权限开放（待修改）
+                                    else:  # 录入权限开放
                                         norm = ctd_list[3].find_element_by_tag_name('a')
                                         exam = ctd_list[4].find_element_by_tag_name('a')
-                                    else:
-                                        norm = exam = None
+                                    # else:
+                                    #     norm = exam = None
 
                                     tdl.append(norm)
                                     tdl.append(exam)
