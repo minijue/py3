@@ -77,6 +77,7 @@ class AutoWeb:
             slst = strlst.split()
             strlst = ','.join(slst)
 
+        # 组织 javascript 脚本字符串，分别用于平时成绩和考核成绩
         tablename = 'listCommonScoreInput' if isnorm else 'listScoreInput'
         strjs = "var arr = new Array(strlst)\nfor (var i=0;i<arr.length;i++)\n{\n      var arrname = 'tablename['+i+'].commonScore'\n document.getElementsByName(arrname)[0].value = arr[i]\n}"
         strjs = strjs.replace('strlst', strlst).replace('tablename', tablename)
