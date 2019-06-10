@@ -36,11 +36,11 @@ if n > 0:
             exp = calfuncs[tp](n * 0.03)
         t.add(exp)
 
-        if len(t) % 5 == 0:
+        if len(t) % 3 == 0:
             elements.append(list(t))
             t.clear()
 
-    etable = Table(elements, rowHeights=38, colWidths=110)
+    etable = Table(elements, rowHeights=38, colWidths=180)
     etable.setStyle(
         TableStyle([
             ('FONTNAME', (0, 0), (-1, -1), 'cambria'),  # 字体
