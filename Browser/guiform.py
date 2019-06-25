@@ -2,8 +2,6 @@ import wx
 
 import bs
 
-SELF_SCLASS_SC_ = self.sclass[sc][1]
-
 
 class MainFrame(wx.Frame):
     def __init__(self, superior):
@@ -113,7 +111,7 @@ class MannulFrame(wx.Frame):
         if self.combo3.GetSelection() > 0:
             sc = self.combo3.GetStringSelection()
             norm = self.sclass[sc][0]
-            exam = SELF_SCLASS_SC_
+            exam = self.sclass[sc][1]
             finished = False
             if (norm == exam) and (norm is None):
                 wx.MessageBox(u'录入权限尚未开放', u'提示！')
