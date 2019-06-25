@@ -30,6 +30,7 @@ if n > 0:
                 lambda x: calfunc.randiv(x)]  # 用lambda表达式作为列表元素
     for i in range(n):
         tp = random.randint(0, 3)
+        # tp = 3
         counts[tp] += 1
         exp = calfuncs[tp](n * 0.03)
         while len(elements) > 0 and exp in elements[-1]:  # 相邻行去重

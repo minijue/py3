@@ -2,6 +2,8 @@ import wx
 
 import bs
 
+SELF_SCLASS_SC_ = self.sclass[sc][1]
+
 
 class MainFrame(wx.Frame):
     def __init__(self, superior):
@@ -111,7 +113,7 @@ class MannulFrame(wx.Frame):
         if self.combo3.GetSelection() > 0:
             sc = self.combo3.GetStringSelection()
             norm = self.sclass[sc][0]
-            exam = self.sclass[sc][1]
+            exam = SELF_SCLASS_SC_
             finished = False
             if (norm == exam) and (norm is None):
                 wx.MessageBox(u'录入权限尚未开放', u'提示！')
@@ -167,8 +169,17 @@ class PasteFrame(wx.Frame):
 
     def onButtonOK(self, event):
         txt = self.text.GetValue()
-        # To Do: 调用JS脚本，完成录入
-        self.root.aw.executejs(txt)
+        self.root.aw.executejs(txt)  # 调用JS脚本，完成录入
+
+        # 录入完临时保存成绩
+        self.root.aw.clickbutton('temp-save')
+
+        # 返回
+        self.root.aw.openlink(None)
+
+        self.Parent.Show(True)
+        self.Parent.onTermSelected(None)
+        self.Destroy()
 
     def onButtonCancel(self, event):
         self.root.aw.openlink(None)

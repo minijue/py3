@@ -52,8 +52,7 @@ def randiv(t):
         b = random.randint(0, 9)
     if a == 1 or b < 2:
         n0 += 1
-    mod = [0] * (a - 1) + list(range(0, a - 1))  # 随机选择一个余数，提高 0 的概率
     c = a * b
-    if len(mod) > 0 and c != 0:
-        c += random.choice(mod)
+    if c != 0 and a > 1:
+        c += random.choice(range(0, a - 1))
     return f'{c} ÷ {a} ='

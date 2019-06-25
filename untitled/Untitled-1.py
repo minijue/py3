@@ -1,34 +1,20 @@
-class Student:  # 基类定义
-    def __init__(self, name='', midterm=0, final=0):
-        self.__name = name  # 私有成员
-        self._midterm = midterm  # 保护成员
-        self._final = final
+import threading
 
-    def __setName(self, name):
-        self._name = name
+def hello(name):
+    global timer
+    print("Hello")  # 定时器结束，运行指定语句
 
-    def __getName(self):
-        return self._name
-
-    name = property(__getName, __setName)
-
-    def setMidterm(self, midterm):
-        self._midterm = midterm
-
-    def setFinal(self, final):
-        self._final = final
+    timer = threading.Timer(0.5, hello) # 上一个定时器结束，需要创建新的定时器
+    timer.start()
 
 
-class LGStudent(Student):  # 派生类定义
-    def calcSemGrade(self):
-        return (self._midterm + self._final) / 2  # 基类成员
+def click():
+    global isstart, timer
+    if not isstart:
+        timer = threading.Timer(0.5, hello) # 创建定时器，定时0.5秒，结束后执行函数 hello
+        timer.start()
+    else:
+        timer.cancel()
 
-    def __str__(self):  # 转换为字符串
-        return self.name + '\t' + str(self.calcSemGrade())  # 基类属性
+    isstart = not isstart
 
-
-lg = LGStudent()
-lg.name = "zhang3"
-lg.setMidterm(60)
-lg.setFinal(70)
-print(lg)

@@ -10,7 +10,7 @@ if __name__ == '__main__':
 class AutoWeb:
     def __init__(self):
         self.__browser = webdriver.Chrome(
-            executable_path=r'C:\Users\jue95\AppData\Local\Google\Chrome\Application\chromedriver.exe')  # for Windows
+            executable_path=r'C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe')  # for Windows
         # self.__browser = webdriver.Chrome()
 
     def openweb(self):
@@ -26,7 +26,7 @@ class AutoWeb:
 
             self.__browser.implicitly_wait(10)
 
-            app_one = self.__browser.find_element_by_class_name('app_one_title')
+            app_one = self.__browser.find_element_by_link_text(u'教务综合管理系统')
             app_one.click()
 
             window = self.__browser.window_handles
@@ -70,6 +70,10 @@ class AutoWeb:
             ahref.click()
         else:
             self.__browser.back()
+
+    def clickbutton(self, classname):
+        btn = self.__browser.find_element_by_class_name(classname)
+        btn.click()
 
     def executejs(self, strlst, isnorm=True):
         # 将成绩列表整理成逗号分隔的字符串
