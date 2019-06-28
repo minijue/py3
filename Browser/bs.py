@@ -65,15 +65,30 @@ class AutoWeb:
             continue
         return th.listOfClasses
 
+    def getValuesByName(self, name):
+        try:
+            strxpath = f"//select[@name='{name}']"
+            ctl = Select(self.__browser.find_element_by_xpath(strxpath))
+            lst = []
+            for o in ctl.options:
+                lst.append(o.text)
+            return lst, ctl.first_selected_option.text
+        except:
+            print("AutoWeb.selectCombo: element not found.")
+
+    def setOptionByName(self, name, selection):
+        try:
+            strxpath = f"//select[@name='{name}']"
+            ctl = Select(self.__browser.find_element_by_xpath(strxpath))
+            ctl.select_by_index(selection)
+        except:
+            print("AutoWeb.selectCombo: element not found.")
+
     def openlink(self, ahref):
         if ahref is not None:
             ahref.click()
         else:
             self.__browser.back()
-
-    def clickbutton(self, classname):
-        btn = self.__browser.find_element_by_class_name(classname)
-        btn.click()
 
     def executejs(self, strlst, isnorm=True):
         # 将成绩列表整理成逗号分隔的字符串

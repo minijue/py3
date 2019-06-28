@@ -2,19 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="47e7721f-a429-4fea-afae-7bbbc7229281" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../calstudy/.idea/calstudy.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../calstudy/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../calstudy/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../calstudy/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/Browser.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Browser.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bs.py" beforeDir="false" afterPath="$PROJECT_DIR$/bs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/guiform.py" beforeDir="false" afterPath="$PROJECT_DIR$/guiform.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../calstudy/calfunc.py" beforeDir="false" afterPath="$PROJECT_DIR$/../calstudy/calfunc.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../calstudy/calmain.py" beforeDir="false" afterPath="$PROJECT_DIR$/../calstudy/calmain.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../untitled/Untitled-1.py" beforeDir="false" afterPath="$PROJECT_DIR$/../untitled/Untitled-1.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -27,11 +17,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1512">
-              <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
-              <folding>
-                <element signature="e#0#28#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="312">
+              <caret line="74" column="54" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
             </state>
           </provider>
         </entry>
@@ -39,8 +26,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="189">
+              <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -51,8 +38,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guiform.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="369">
-              <caret line="115" column="19" selection-start-line="115" selection-start-column="19" selection-end-line="115" selection-end-column="19" />
+            <state relative-caret-position="337">
+              <caret line="169" column="53" selection-start-line="169" selection-start-column="52" selection-end-line="169" selection-end-column="53" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -83,6 +70,8 @@
       <find>browser</find>
       <find>clslst</find>
       <find>raido</find>
+      <find>aw</find>
+      <find>click</find>
     </findStrings>
     <replaceStrings>
       <replace>self.__browser</replace>
@@ -93,6 +82,7 @@
   <component name="Git.Settings">
     <option name="PREVIOUS_COMMIT_AUTHORS">
       <list>
+        <option value="王珏 &lt;jue952@live.cn&gt;" />
         <option value="王珏 &lt;jue952@126.com&gt;1." />
         <option value="王珏 &lt;jue952@126.com&gt;" />
       </list>
@@ -293,7 +283,21 @@
       <option name="project" value="LOCAL" />
       <updated>1559056696686</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="1. 粘贴完成后临时保存&#10;2. 保存后返回&#10;3. 定义 clickbutton 函数，根据 classname 找到并点击按钮">
+      <created>1561468760294</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1561468760294</updated>
+    </task>
+    <task id="LOCAL-00006" summary="修改 bug">
+      <created>1561468831790</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1561468831790</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
@@ -303,12 +307,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25605902" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17755532" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.21800433" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22125813" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.31453362" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -339,7 +343,9 @@
     <MESSAGE value="修改粘贴界面退出时程序不退出的bug" />
     <MESSAGE value="1. 从网页中获取学期数据&#10;2. 从网页中获取对应学期教学班级和小班数据&#10;3. 建立下拉列表的对应关系&#10;4. 手动粘贴界面调整" />
     <MESSAGE value="1. 将自动填写JS脚本封装成函数&#10;2. 修改平时成绩和考核成绩的录入链接&#10;3. 在粘贴界面提示平时成绩或考核成绩" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 将自动填写JS脚本封装成函数&#10;2. 修改平时成绩和考核成绩的录入链接&#10;3. 在粘贴界面提示平时成绩或考核成绩" />
+    <MESSAGE value="1. 粘贴完成后临时保存&#10;2. 保存后返回&#10;3. 定义 clickbutton 函数，根据 classname 找到并点击按钮" />
+    <MESSAGE value="修改 bug" />
+    <option name="LAST_COMMIT_MESSAGE" value="修改 bug" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -354,26 +360,6 @@
     <entry file="file://$PROJECT_DIR$/__pycache__/guiform.cpython-37.pyc" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/selenium/webdriver/remote/errorhandler.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/wx/core.py" />
-    <entry file="file://$PROJECT_DIR$/bs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1512">
-          <caret line="75" column="19" selection-start-line="75" selection-start-column="19" selection-end-line="75" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#28#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#9#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readexcel.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="21">
@@ -381,10 +367,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://E:/Program Files/Python/Python37/Lib/site-packages/selenium/webdriver/support/select.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2405">
+          <caret line="218" selection-start-line="218" selection-end-line="218" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/main.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" lean-forward="true" selection-start-line="9" selection-end-line="9" />
+          <folding>
+            <element signature="e#0#9#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="312">
+          <caret line="74" column="54" selection-start-line="74" selection-start-column="54" selection-end-line="74" selection-end-column="54" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/guiform.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="369">
-          <caret line="115" column="19" selection-start-line="115" selection-start-column="19" selection-end-line="115" selection-end-column="19" />
+        <state relative-caret-position="337">
+          <caret line="169" column="53" selection-start-line="169" selection-start-column="52" selection-end-line="169" selection-end-column="53" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

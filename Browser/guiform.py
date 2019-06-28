@@ -2,10 +2,11 @@ import wx
 
 import bs
 
+aw = bs.AutoWeb()
+
 
 class MainFrame(wx.Frame):
     def __init__(self, superior):
-        self.aw = bs.AutoWeb()
 
         wx.Frame.__init__(self, parent=superior, id=wx.ID_ANY, title=u'华东交通大学 - 成绩自动录入', pos=(700, 400), \
                           size=(370, 220),
@@ -24,7 +25,7 @@ class MainFrame(wx.Frame):
         self.Bind(wx.EVT_BUTTON, self.onButtonCancel, self.buttonCancel)
 
     def onClose(self, event):
-        self.aw.browser.quit()
+        aw.browser.quit()
         self.Destroy()
 
     def onButtonOK(self, event):
@@ -35,12 +36,12 @@ class MainFrame(wx.Frame):
             pass
         else:
             # 手动
-            tlst = self.aw.getterms()
+            tlst = aw.getterms()
             if len(tlst) != 0:
                 fr = MannulFrame(self, tlst)
                 fr.Show(True)
             else:
-                self.aw.browser.quit()
+                aw.browser.quit()
                 self.Destroy()
 
     def onButtonCancel(self, event):
@@ -80,14 +81,14 @@ class MannulFrame(wx.Frame):
         self.onTermSelected(None)
 
     def onClose(self, event):
-        self.Parent.aw.browser.quit()
+        aw.browser.quit()
         self.Parent.Destroy()
         self.Destroy()
 
     def onTermSelected(self, event):
-        self.Parent.aw.selectCombo(self.combo1.GetSelection())
+        aw.selectCombo(self.combo1.GetSelection())
         # 获取所有班级列表（字典，值是对应的小班dict），并显示名称
-        self.clst = self.Parent.aw.getClasses()
+        self.clst = aw.getClasses()
         self.combo2.Set(list(self.clst.keys()))
 
         self.combo2.SetSelection(0)
@@ -127,67 +128,107 @@ class MannulFrame(wx.Frame):
                     self.radio1.SetValue(True)
 
                 link = exam if self.radio2.GetValue() else norm
+                aw.openlink(ahref=link)
 
-                self.Show(False)
+                if not finished:
+                    self.Show(False)
 
-                fr = PasteFrame(self, finished)
-                fr.Show(True)
-
-                self.Parent.aw.openlink(ahref=link)
+                    fr = PasteFrame(self, finished, self.radio1.GetValue())
+                    fr.Show(True)
 
 
 class PasteFrame(wx.Frame):
-    def __init__(self, superior, finished):
+    def __init__(self, superior, finished, isNorm):
         wx.Frame.__init__(self, parent=superior, id=wx.ID_ANY, title=u'手动粘贴成绩', pos=(700, 400), \
-                          size=(450, 220),
+                          size=(450, 250),
                           style=wx.DEFAULT_FRAME_STYLE ^ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
-
-        self.root = self.Parent.Parent
-
+        self.isNorm = isNorm
+        self.scores = {'百分制': 'score', '两级分制': 'twoTypescore', '五级分制': 'fiveTypescore'}
         panel = wx.Panel(self, -1)
 
         self.Parent.__class__ = MannulFrame
-        isnorm = self.Parent.radio1.GetValue()
 
-        lbltxt = u'请将 ' + (u'平时' if isnorm else u'考核') + u'成绩 列表复制后粘贴至下列文本框：'
-        self.label = wx.StaticText(panel, -1, lbltxt, pos=(30, 25))
-        self.text = wx.TextCtrl(panel, -1, "", pos=(30, 55), size=(390, 70), style=wx.TE_MULTILINE)
+        lbltxt = u'平时成绩比例：' if self.isNorm else u'成绩类型：'
+        self.label1 = wx.StaticText(panel, -1, lbltxt, pos=(30, 15))
+        self.combo = wx.ComboBox(panel, -1, pos=(120, 13))
 
-        self.buttonOK = wx.Button(panel, -1, u"确定", pos=(130, 140))
+        lbltxt = u'请将 ' + u'成绩列表复制后粘贴至下列文本框：'
+        self.label2 = wx.StaticText(panel, -1, lbltxt, pos=(30, 55))
+        self.text = wx.TextCtrl(panel, -1, "", pos=(30, 85), size=(390, 70), style=wx.TE_MULTILINE)
+
+        self.buttonOK = wx.Button(panel, -1, u"确定", pos=(130, 170))
         if finished:
             self.text.SetEditable(False)
             self.buttonOK.Disable()
         else:
+            if self.isNorm:
+                lstoption, v = aw.getValuesByName("commonScale")
+                self.combo.Set(lstoption)
+                self.combo.SetValue(v)
+            else:
+                try:  # 需要选择成绩类型
+                    _ = aw.browser.find_element_by_id("score")
+                    self.combo.Set(list(self.scores.keys()))
+                    self.combo.SetValue('百分制')
+
+                    self.text.SetEditable(False)
+                    self.buttonOK.Disable()
+                except:  # 不需要选择
+                    self.combo.Disable()
+                    self.text.SetEditable(True)
+                    self.buttonOK.Enable()
+
+            self.Bind(wx.EVT_COMBOBOX, self.onSelectScale, self.combo)
             self.Bind(wx.EVT_BUTTON, self.onButtonOK, self.buttonOK)
 
-        self.buttonCancel = wx.Button(panel, -1, u"取消", pos=(230, 140))
+        self.buttonCancel = wx.Button(panel, -1, u"取消", pos=(230, 170))
         self.Bind(wx.EVT_BUTTON, self.onButtonCancel, self.buttonCancel)
 
         self.Bind(wx.EVT_CLOSE, self.onClose)
 
+    def onSelectScale(self, event):
+        if self.isNorm:
+            aw.setOptionByName("commonScale", self.combo.GetSelection())
+        else:
+            if self.text.IsEditable() is False:
+                v = self.combo.GetStringSelection()
+                try:
+                    score = aw.browser.find_element_by_id(self.scores[v])
+                    score.click()
+                    self.combo.Disable()
+                except:
+                    pass
+                finally:
+                    self.text.SetEditable(True)
+                    self.buttonOK.Enable()
+
     def onButtonOK(self, event):
         txt = self.text.GetValue()
-        self.root.aw.executejs(txt)  # 调用JS脚本，完成录入
+        aw.executejs(txt)  # 调用JS脚本，完成录入
 
         # 录入完临时保存成绩
-        self.root.aw.clickbutton('temp-save')
+        btn = aw.browser.find_element_by_class_name('temp-save')
+        if btn:
+            btn.click()
 
         # 返回
-        self.root.aw.openlink(None)
+        aw.openlink(None)
 
         self.Parent.Show(True)
         self.Parent.onTermSelected(None)
         self.Destroy()
 
     def onButtonCancel(self, event):
-        self.root.aw.openlink(None)
+        aw.openlink(None)
+        if u'分' in self.combo.GetStringSelection():
+            aw.openlink(None)
 
         self.Parent.Show(True)
         self.Parent.onTermSelected(None)
         self.Destroy()
 
     def onClose(self, event):
-        self.root.aw.browser.quit()
+        aw.browser.quit()
         self.Parent.Destroy()
         self.root.Destroy()
         self.Destroy()
