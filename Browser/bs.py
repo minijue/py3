@@ -10,7 +10,7 @@ if __name__ == '__main__':
 class AutoWeb:
     def __init__(self):
         self.__browser = webdriver.Chrome(
-            executable_path=r'C:\Users\Administrator\AppData\Local\Google\Chrome\Application\chromedriver.exe')  # for Windows
+            executable_path=r'C:\Users\jue95\AppData\Local\Google\Chrome\Application\chromedriver.exe')  # for Windows
         # self.__browser = webdriver.Chrome()
 
     def openweb(self):
@@ -57,7 +57,7 @@ class AutoWeb:
             select = self.__browser.find_element_by_xpath("//select[@id='m-term']")
             Select(select).select_by_index(index)
         except:
-            print("AutoWeb.selectCombo: element not found.")
+            print("AutoWeb.selectCombo: element m-term not found.")
 
     def getClasses(self):  # 获取所有班级和小班数据
         th = MyThread(self.__browser)
@@ -74,7 +74,7 @@ class AutoWeb:
                 lst.append(o.text)
             return lst, ctl.first_selected_option.text
         except:
-            print("AutoWeb.selectCombo: element not found.")
+            print(f"AutoWeb.selectCombo: element {name} not found.")
 
     def setOptionByName(self, name, selection):
         try:
@@ -82,7 +82,7 @@ class AutoWeb:
             ctl = Select(self.__browser.find_element_by_xpath(strxpath))
             ctl.select_by_index(selection)
         except:
-            print("AutoWeb.selectCombo: element not found.")
+            print(f"AutoWeb.selectCombo: element {name} not found.")
 
     def openlink(self, ahref):
         if ahref is not None:
@@ -151,8 +151,19 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
                                     if cattr == 'finish':  # 录入已完成，权限已关闭，仅可查看
                                         norm = exam = ctd_list[5].find_element_by_tag_name('a')
                                     else:  # 录入权限开放
-                                        norm = ctd_list[3].find_element_by_tag_name('a')
-                                        exam = ctd_list[4].find_element_by_tag_name('a')
+                                        if u'已' in ctd_list[3].text:
+                                            norm = None
+                                        else:
+                                            norm = ctd_list[3].find_element_by_tag_name('a')
+
+                                        if u'已' in ctd_list[4].text:
+                                            exam = None
+                                        else:
+                                            exam = ctd_list[4].find_element_by_tag_name('a')
+
+                                        if norm == exam is None:  # 录入已完成，仅可查看
+                                            norm = exam = ctd_list[5].find_element_by_tag_name('a')
+
                                     # else:
                                     #     norm = exam = None
 

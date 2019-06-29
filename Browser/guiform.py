@@ -118,7 +118,7 @@ class MannulFrame(wx.Frame):
                 wx.MessageBox(u'录入权限尚未开放', u'提示！')
             else:
                 if norm == exam:
-                    wx.MessageBox(u'录入已完成，权限已关闭，仅可查看', u'提示！')
+                    wx.MessageBox(u'录入已完成，仅可查看', u'提示！')
                     finished = True
 
                 if norm is None:
