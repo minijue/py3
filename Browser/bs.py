@@ -12,14 +12,17 @@ class AutoWeb:
         self.__browser = webdriver.Chrome(
             executable_path=r'C:\Users\jue95\AppData\Local\Google\Chrome\Application\chromedriver.exe')  # for Windows
         # self.__browser = webdriver.Chrome()
+        self.__browser.maximize_window()
 
-    def openweb(self):
         self.__browser.get('http://portal.ecjtu.edu.cn:8080/form/forward.action?path=/portal/portal&p=hjdHome#sd=1012')
         try:
             usr = self.__browser.find_element_by_name('username')
             pwd = self.__browser.find_element_by_name('password')
-            usr.send_keys('1864')
-            pwd.send_keys('ecjtuWj952')
+            with open('user.txt', 'r') as uf:
+                uname = uf.readline()
+                upwd = uf.readline()
+                usr.send_keys(uname)
+                pwd.send_keys(upwd)
 
             btn = self.__browser.find_element_by_class_name('login_box_landing_btn')
             btn.click()
@@ -39,7 +42,6 @@ class AutoWeb:
 
     def getterms(self):  # 获取所有的学期数据
         try:
-            self.openweb()
             # 选择学期，测试用代码，实际不需要
             select = self.__browser.find_element_by_xpath("//select[@id='m-term']")
             options_list = Select(select).options
