@@ -286,7 +286,7 @@ class PasteFrame(wx.Frame):
         self.label1 = wx.StaticText(panel, -1, lbltxt, pos=(30, 15))
         self.combo = wx.ComboBox(panel, -1, pos=(120, 13))
 
-        lbltxt = u'请将 ' + u'成绩列表复制后粘贴至下列文本框：'
+        lbltxt = u'请将成绩列表复制后粘贴至下列文本框：'
         self.label2 = wx.StaticText(panel, -1, lbltxt, pos=(30, 55))
         self.text = wx.TextCtrl(panel, -1, "", pos=(30, 85), size=(390, 70), style=wx.TE_MULTILINE)
 
@@ -343,7 +343,7 @@ class PasteFrame(wx.Frame):
 
     def onButtonOK(self, event):
         txt = self.text.GetValue()
-        if (self.Parent.norm is not None) and (not self.isNorm):
+        if self.combo.GetStringSelection() in list(self.scores.keys):
             aw.executejs(txt, 'total')  # 直接录入总评成绩
         else:
             aw.executejs(txt, self.isNorm)
