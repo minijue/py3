@@ -1,5 +1,5 @@
+import sys
 import threading
-import time
 
 import wx
 
@@ -12,10 +12,10 @@ aw = bs.AutoWeb()
 # 自动录入平时成绩
 def AutoNorm(ef):
     cs = ef.getClasses()
-    global clst
     clst = aw.getClasses()
 
-    for c in ef.getClassNames():
+    cNames = ef.getClassNames()
+    for c in cNames:
         ckey = c[:c.find(')') + 1]
         ci = cs.__next__()
 
@@ -34,25 +34,31 @@ def AutoNorm(ef):
             # 临时保存并返回
             try:
                 aw.browser.find_element_by_class_name('temp-save').click()
-                time.sleep(5)
+                # time.sleep(5)
             except:
                 pass
-            aw.browser.find_element_by_class_name('back').click()
+            aw.openlink(None)
+            # aw.browser.find_element_by_class_name('back').click()
             clst = aw.getClasses()
 
 
 # 自动录入考核成绩
 def AutoExam(ef):
     cs = ef.getClasses()
-    global clst
-    if clst is None:
-        clst = aw.getClasses()
+    aw.browser.refresh()
+    clst = aw.getClasses()
 
     for c in ef.getClassNames():
         ckey = c[:c.find(')') + 1]
         ci = cs.__next__()
 
         sclass = clst[ckey]
+        ci.norm = sclass[c][0]
+        if ci.norm is not None:
+            if wx.MessageDialog(None, u"请先提交所有班级平时成绩后再录入考核成绩！", u"考核成绩",
+                                wx.OK | wx.ICON_QUESTION).ShowModal() == wx.ID_OK:
+                sys.exit()
+            break
         ci.exam = sclass[c][1]
         if ci.exam is not None:
             aw.openlink(ahref=ci.exam)
@@ -64,8 +70,9 @@ def AutoExam(ef):
 
             # 临时保存并返回
             aw.browser.find_element_by_class_name('temp-save').click()
-            time.sleep(5)
-            aw.browser.find_element_by_class_name('back').click()
+            # time.sleep(5)
+            # aw.browser.find_element_by_class_name('back').click()
+            aw.openlink(None)
             clst = aw.getClasses()
 
 
@@ -162,9 +169,9 @@ class ExcelFrame(wx.Frame):
                     t2.start()
                     t2.join()
 
-        wx.MessageDialog(None, u"考核成绩录入完毕，请不要忘记手工核对并提交！", u"考核成绩",
-                         wx.YES_NO | wx.ICON_QUESTION)
         self.onClose(None)
+        wx.MessageDialog(None, u"考核成绩录入完毕，请不要忘记手工核对并提交！", u"考核成绩",
+                         wx.OK | wx.ICON_QUESTION).ShowModal()
 
     def onButtonCancel(self, event):
         self.Parent.Show(True)
@@ -336,12 +343,13 @@ class PasteFrame(wx.Frame):
 
     def onButtonOK(self, event):
         txt = self.text.GetValue()
-        aw.executejs(txt)  # 调用JS脚本，完成录入
+        if (self.Parent.norm is not None) and (not self.isNorm):
+            aw.executejs(txt, 'total')  # 直接录入总评成绩
+        else:
+            aw.executejs(txt, self.isNorm)
 
         # 录入完临时保存成绩
-        btn = aw.browser.find_element_by_class_name('temp-save')
-        if btn:
-            btn.click()
+        aw.browser.find_element_by_class_name('temp-save').click()
 
         # 返回
         aw.openlink(None)

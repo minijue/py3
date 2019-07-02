@@ -124,8 +124,11 @@ class AutoWeb:
 
         # 组织 javascript 脚本字符串，分别用于平时成绩和考核成绩
         tablename = 'listCommonScoreInput' if isnorm else 'listScoreInput'
+        score = 'commonScore' if isnorm else 'examScore'
+        if isnorm == "total":  # 录入总评成绩
+            score = "score"
         strjs = "var arr = new Array(strlst)\nfor (var i=0;i<arr.length;i++)\n{\n      var arrname = 'tablename['+i+'].commonScore'\n document.getElementsByName(arrname)[0].value = arr[i]\n}"
-        strjs = strjs.replace('strlst', strlst).replace('tablename', tablename)
+        strjs = strjs.replace('strlst', strlst).replace('tablename', tablename).replace('commonScore', score)
 
         self.__browser.execute_script(strjs)
 
@@ -177,7 +180,7 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
                                     if cattr == 'finish':  # 录入已完成，权限已关闭，仅可查看
                                         norm = exam = ctd_list[5].find_element_by_tag_name('a')
                                     else:  # 录入权限开放
-                                        if u'已录入' in ctd_list[3].text:
+                                        if u'已录入' in ctd_list[3].text or u'修改' in ctd_list[3].text:
                                             norm = None
                                         else:
                                             norm = ctd_list[3].find_element_by_tag_name('a')
