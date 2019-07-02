@@ -1,8 +1,70 @@
+import threading
+import time
+
 import wx
 
 import bs
+import readexcel as rxl
 
 aw = bs.AutoWeb()
+
+
+def AutoNorm(ef):
+    cs = ef.getClasses()
+    global clst
+    clst = aw.getClasses()
+
+    for c in ef.getClassNames():
+        ckey = c[:c.find(')') + 1]
+        ci = cs.__next__()
+
+        sclass = clst[ckey]
+        ci.norm = sclass[c][0]
+        if ci.norm is not None:
+            aw.openlink(ahref=ci.norm)
+            # 设置平时成绩比例
+            aw.setOptionByName("commonScale", ci.scale)
+
+            # 逐个录入成绩
+            sos = ci.GetStudents()
+            for cn in sos:
+                aw.sendTextByName(cn, sos[cn][0], "norm")
+
+            # 临时保存并返回
+            try:
+                aw.browser.find_element_by_class_name('temp-save').click()
+                time.sleep(5)
+            except:
+                pass
+            aw.browser.find_element_by_class_name('back').click()
+            clst = aw.getClasses()
+
+
+def AutoExam(ef):
+    cs = ef.getClasses()
+    global clst
+    if clst is None:
+        clst = aw.getClasses()
+
+    for c in ef.getClassNames():
+        ckey = c[:c.find(')') + 1]
+        ci = cs.__next__()
+
+        sclass = clst[ckey]
+        ci.exam = sclass[c][1]
+        if ci.exam is not None:
+            aw.openlink(ahref=ci.exam)
+
+            # 逐个录入成绩
+            sos = ci.GetStudents()
+            for cn in sos:
+                aw.sendTextByName(cn, sos[cn][1], "exam")
+
+            # 临时保存并返回
+            aw.browser.find_element_by_class_name('temp-save').click()
+            time.sleep(5)
+            aw.browser.find_element_by_class_name('back').click()
+            clst = aw.getClasses()
 
 
 class MainFrame(wx.Frame):
@@ -32,7 +94,7 @@ class MainFrame(wx.Frame):
         self.Show(False)
 
         if self.radio1.GetValue():
-            # To Do: 自动从 Excel 文件导入
+            # 自动从 Excel 文件导入界面
             fr = ExcelFrame(self)
             fr.Show(True)
         else:
@@ -75,13 +137,32 @@ class ExcelFrame(wx.Frame):
         self.Destroy()
 
     def onBtnBrowse(self, event):
-        wildcard = 'Excel 文件(*.xlsx; *.xls)|*.xlsx; *.xls'
+        wildcard = 'Excel 文件(*.xlsx)|*.xlsx'
         with wx.FileDialog(self, "Open XYZ file", wildcard, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
             if fileDialog.ShowModal() == wx.ID_OK:
-                self.pathText.SetValue(self.path)
+                self.pathText.SetValue(fileDialog.GetPath())
 
     def onButtonOK(self, event):
-        pass
+        # 打开 excel 文件，自动完成平时成绩录入并自动保存
+        self.Enable(False)
+        pa = self.pathText.GetLineText(0)
+        if pa != '':
+            ef = rxl.ExcelFile(pa)
+            t1 = threading.Thread(target=AutoNorm, name="", args=(ef,))
+            t1.start()
+            t1.join()
+
+            # 确认平时成绩后，自动录入考核成绩
+            with wx.MessageDialog(None, u"平时成绩录入完毕，请手工核对并提交后，单击确定继续录入考核成绩", u"平时成绩",
+                                  wx.YES_NO | wx.ICON_QUESTION) as dlg:
+                if dlg.ShowModal() == wx.ID_YES:
+                    t2 = threading.Thread(target=AutoExam, name="", args=(ef,))
+                    t2.start()
+                    t2.join()
+
+        wx.MessageDialog(None, u"考核成绩录入完毕，请不要忘记手工核对并提交！", u"考核成绩",
+                         wx.YES_NO | wx.ICON_QUESTION)
+        self.onClose(None)
 
     def onButtonCancel(self, event):
         self.Parent.Show(True)
@@ -98,6 +179,7 @@ class MannulFrame(wx.Frame):
         panel = wx.Panel(self, -1)
 
         self.sclass = {}
+        self.norm = None
 
         self.label1 = wx.StaticText(panel, -1, u'请选择学期：', pos=(30, 30))
         self.combo1 = wx.ComboBox(panel, -1, value=keys[0], choices=keys, pos=(130, 26), size=(290, 26))
@@ -149,26 +231,26 @@ class MannulFrame(wx.Frame):
             self.combo3.SetSelection(0)
 
     def onSClassSelected(self, event):
-        # To Do: 打开小班对应的录入页面
+        # 打开小班对应的录入页面
         if self.combo3.GetSelection() > 0:
             sc = self.combo3.GetStringSelection()
-            norm = self.sclass[sc][0]
+            self.norm = self.sclass[sc][0]
             exam = self.sclass[sc][1]
             finished = False
-            if (norm == exam) and (norm is None):
+            if (self.norm == exam) and (self.norm is None):
                 wx.MessageBox(u'录入权限尚未开放', u'提示！')
             else:
-                if norm == exam:
+                if self.norm == exam:
                     wx.MessageBox(u'录入已完成，仅可查看', u'提示！')
                     finished = True
 
-                if norm is None:
+                if self.norm is None:
                     self.radio2.SetValue(True)
 
                 if exam is None:
                     self.radio1.SetValue(True)
 
-                link = exam if self.radio2.GetValue() else norm
+                link = exam if self.radio2.GetValue() else self.norm
                 aw.openlink(ahref=link)
 
                 if not finished:
@@ -209,14 +291,19 @@ class PasteFrame(wx.Frame):
                 self.combo.Set(lstoption)
                 self.combo.SetValue(v)
             else:
-                try:  # 需要选择成绩类型
-                    _ = aw.browser.find_element_by_id("score")
-                    self.combo.Set(list(self.scores.keys()))
-                    self.combo.SetValue('百分制')
+                if self.Parent.norm is not None:
+                    try:  # 需要选择成绩类型
+                        _ = aw.browser.find_element_by_id("score")
+                        self.combo.Set(list(self.scores.keys()))
+                        self.combo.SetValue('百分制')
 
-                    self.text.SetEditable(False)
-                    self.buttonOK.Disable()
-                except:  # 不需要选择
+                        self.text.SetEditable(False)
+                        self.buttonOK.Disable()
+                    except:  # 不需要选择
+                        self.combo.Disable()
+                        self.text.SetEditable(True)
+                        self.buttonOK.Enable()
+                else:
                     self.combo.Disable()
                     self.text.SetEditable(True)
                     self.buttonOK.Enable()

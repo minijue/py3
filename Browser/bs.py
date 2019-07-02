@@ -53,6 +53,26 @@ class AutoWeb:
         except:
             print("element not found.")
 
+    def sendTextByName(self, name, score, isnorm):
+        ntd = self.__browser.find_element_by_xpath(f"//input[@value='{name}']")
+        nname = ntd.get_attribute('name')
+        nname = nname[:nname.find('.')]
+
+        if isnorm == "norm":
+            nname = nname + '.commonScore'
+        elif isnorm == "exam":
+            nname = nname + '.examScore'
+        else:
+            nname = nname + '.score'
+
+        etd = self.__browser.find_element_by_xpath(f"//input[@name='{nname}']")
+        etd.clear()
+        s = str(score)
+        i = s.find('.')
+        if i > -1:
+            s = s[:i + 3]
+        etd.send_keys(s)
+
     def selectCombo(self, index):  # 自动选择学期列表
         try:
             select = self.__browser.find_element_by_xpath("//select[@id='m-term']")
@@ -81,7 +101,12 @@ class AutoWeb:
         try:
             strxpath = f"//select[@name='{name}']"
             ctl = Select(self.__browser.find_element_by_xpath(strxpath))
-            ctl.select_by_index(selection)
+            if str(selection).isdigit():
+                ctl.select_by_index(selection)
+            else:
+                selection = selection[:selection.find('%')]
+                index = int(selection) // 5 - 1
+                ctl.select_by_index(index)
         except:
             print(f"AutoWeb.selectCombo: element {name} not found.")
 
@@ -152,12 +177,12 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
                                     if cattr == 'finish':  # 录入已完成，权限已关闭，仅可查看
                                         norm = exam = ctd_list[5].find_element_by_tag_name('a')
                                     else:  # 录入权限开放
-                                        if u'已' in ctd_list[3].text:
+                                        if u'已录入' in ctd_list[3].text:
                                             norm = None
                                         else:
                                             norm = ctd_list[3].find_element_by_tag_name('a')
 
-                                        if u'已' in ctd_list[4].text:
+                                        if u'已录入' in ctd_list[4].text:
                                             exam = None
                                         else:
                                             exam = ctd_list[4].find_element_by_tag_name('a')

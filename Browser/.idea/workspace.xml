@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="47e7721f-a429-4fea-afae-7bbbc7229281" name="Default Changelist" comment="">
+    <list default="true" id="47e7721f-a429-4fea-afae-7bbbc7229281" name="Default Changelist" comment="1. 修改了考核成绩录入时等待成绩类型页面延时过长的问题">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bs.py" beforeDir="false" afterPath="$PROJECT_DIR$/bs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/guiform.py" beforeDir="false" afterPath="$PROJECT_DIR$/guiform.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readexcel.py" beforeDir="false" afterPath="$PROJECT_DIR$/readexcel.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -16,8 +18,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+            <state relative-caret-position="646">
+              <caret line="73" column="24" lean-forward="true" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#28#0" expanded="true" />
+                <element signature="e#4799#6785#0" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -25,7 +31,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/main.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
+            <state relative-caret-position="114">
               <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
@@ -37,10 +43,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guiform.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="511">
-              <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
+            <state relative-caret-position="304">
+              <caret line="154" column="61" selection-start-line="154" selection-start-column="61" selection-end-line="154" selection-end-column="61" />
               <folding>
-                <element signature="e#0#9#0" expanded="true" />
+                <element signature="e#0#23#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -49,8 +55,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/readexcel.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="190">
-              <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+            <state relative-caret-position="1197">
+              <caret line="63" column="50" selection-start-line="63" selection-start-column="50" selection-end-line="63" selection-end-column="50" />
             </state>
           </provider>
         </entry>
@@ -93,8 +99,8 @@
       <list>
         <option value="$PROJECT_DIR$/toList.py" />
         <option value="$PROJECT_DIR$/main.py" />
-        <option value="$PROJECT_DIR$/bs.py" />
         <option value="$PROJECT_DIR$/readexcel.py" />
+        <option value="$PROJECT_DIR$/bs.py" />
         <option value="$PROJECT_DIR$/guiform.py" />
       </list>
     </option>
@@ -261,7 +267,7 @@
       <workItem from="1561954245357" duration="29000" />
       <workItem from="1561954343785" duration="58000" />
       <workItem from="1562043471436" duration="4064000" />
-      <workItem from="1562052062996" duration="472000" />
+      <workItem from="1562052062996" duration="23046000" />
     </task>
     <task id="LOCAL-00001" summary="1. 图形界面&#10;2. 粘贴界面&#10;3. 粘贴字符串转换为数字列表">
       <created>1550468635292</created>
@@ -326,11 +332,18 @@
       <option name="project" value="LOCAL" />
       <updated>1562047482508</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="1. 完成导入Excel文件的界面&#10;2. 修改各个界面点击退出无响应的 BUG">
+      <created>1562052615246</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1562052615246</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="13375000" />
+    <option name="totallyTimeSpent" value="35949000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -350,7 +363,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.22125813" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22125813" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.31453362" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -386,7 +399,8 @@
     <MESSAGE value="修改平时成绩完成录入时，程序出错的bug" />
     <MESSAGE value="1. 智慧交大的用户名和密码放在txt文件中&#10;2. 浏览器最大化" />
     <MESSAGE value="1. 定义表示班级成绩的类&#10;2. 初步定义导入Excel文件的界面" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 定义表示班级成绩的类&#10;2. 初步定义导入Excel文件的界面" />
+    <MESSAGE value="1. 完成导入Excel文件的界面&#10;2. 修改各个界面点击退出无响应的 BUG" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 完成导入Excel文件的界面&#10;2. 修改各个界面点击退出无响应的 BUG" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -399,33 +413,38 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Browser$main.coverage" NAME="main Coverage Results" MODIFIED="1562052539241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Browser$main.coverage" NAME="main Coverage Results" MODIFIED="1562074874372" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file:///usr/local/python3/lib/python3.7/site-packages/wx/core.py" />
     <entry file="file:///usr/local/python3/lib/python3.7/threading.py" />
     <entry file="file://$PROJECT_DIR$/toList.py" />
     <entry file="file://$PROJECT_DIR$/__pycache__/guiform.cpython-37.pyc" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/selenium/webdriver/remote/errorhandler.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/wx/core.py" />
     <entry file="file://E:/Program Files/Python/Python37/Lib/site-packages/selenium/webdriver/support/select.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/openpyxl/worksheet/worksheet.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="373">
-          <caret line="925" column="57" lean-forward="true" selection-start-line="925" selection-start-column="57" selection-end-line="925" selection-end-column="57" />
+        <state relative-caret-position="202">
+          <caret line="236" selection-start-line="236" selection-end-line="236" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bs.py">
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/wx/core.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        <state relative-caret-position="202">
+          <caret line="2165" selection-start-line="2165" selection-end-line="2165" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/selenium/webdriver/remote/errorhandler.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="241" selection-start-line="241" selection-end-line="241" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
+        <state relative-caret-position="114">
           <caret line="6" column="4" selection-start-line="6" selection-start-column="4" selection-end-line="6" selection-end-column="4" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
@@ -433,19 +452,37 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/threading.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="202">
+          <caret line="864" selection-start-line="864" selection-end-line="864" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/bs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="73" column="24" lean-forward="true" selection-start-line="73" selection-start-column="24" selection-end-line="73" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#28#0" expanded="true" />
+            <element signature="e#4799#6785#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/readexcel.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="190">
-          <caret line="10" column="24" selection-start-line="10" selection-start-column="24" selection-end-line="10" selection-end-column="24" />
+        <state relative-caret-position="1197">
+          <caret line="63" column="50" selection-start-line="63" selection-start-column="50" selection-end-line="63" selection-end-column="50" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/guiform.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="511">
-          <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
+        <state relative-caret-position="304">
+          <caret line="154" column="61" selection-start-line="154" selection-start-column="61" selection-end-line="154" selection-end-column="61" />
           <folding>
-            <element signature="e#0#9#0" expanded="true" />
+            <element signature="e#0#23#0" expanded="true" />
           </folding>
         </state>
       </provider>
