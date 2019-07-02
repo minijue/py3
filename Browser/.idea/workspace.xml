@@ -3,9 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="47e7721f-a429-4fea-afae-7bbbc7229281" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bs.py" beforeDir="false" afterPath="$PROJECT_DIR$/bs.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/guiform.py" beforeDir="false" afterPath="$PROJECT_DIR$/guiform.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readexcel.py" beforeDir="false" afterPath="$PROJECT_DIR$/readexcel.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,7 +16,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/bs.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
+            <state relative-caret-position="114">
               <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
             </state>
           </provider>
@@ -39,8 +37,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/guiform.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
+            <state relative-caret-position="511">
+              <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
               <folding>
                 <element signature="e#0#9#0" expanded="true" />
               </folding>
@@ -113,7 +111,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -125,6 +122,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -262,7 +260,8 @@
       <workItem from="1561953980248" duration="112000" />
       <workItem from="1561954245357" duration="29000" />
       <workItem from="1561954343785" duration="58000" />
-      <workItem from="1562043471436" duration="3881000" />
+      <workItem from="1562043471436" duration="4064000" />
+      <workItem from="1562052062996" duration="472000" />
     </task>
     <task id="LOCAL-00001" summary="1. 图形界面&#10;2. 粘贴界面&#10;3. 粘贴字符串转换为数字列表">
       <created>1550468635292</created>
@@ -320,11 +319,18 @@
       <option name="project" value="LOCAL" />
       <updated>1561953360864</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="1. 定义表示班级成绩的类&#10;2. 初步定义导入Excel文件的界面">
+      <created>1562047482508</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1562047482508</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12720000" />
+    <option name="totallyTimeSpent" value="13375000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -339,12 +345,12 @@
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.19349681" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.195629" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.22125813" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.22125813" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.31453362" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -379,7 +385,8 @@
     <MESSAGE value="修改 bug" />
     <MESSAGE value="修改平时成绩完成录入时，程序出错的bug" />
     <MESSAGE value="1. 智慧交大的用户名和密码放在txt文件中&#10;2. 浏览器最大化" />
-    <option name="LAST_COMMIT_MESSAGE" value="1. 智慧交大的用户名和密码放在txt文件中&#10;2. 浏览器最大化" />
+    <MESSAGE value="1. 定义表示班级成绩的类&#10;2. 初步定义导入Excel文件的界面" />
+    <option name="LAST_COMMIT_MESSAGE" value="1. 定义表示班级成绩的类&#10;2. 初步定义导入Excel文件的界面" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
@@ -392,7 +399,7 @@
     </watches-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/Browser$main.coverage" NAME="main Coverage Results" MODIFIED="1562047381124" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/Browser$main.coverage" NAME="main Coverage Results" MODIFIED="1562052539241" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file:///usr/local/python3/lib/python3.7/site-packages/wx/core.py" />
@@ -409,6 +416,13 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bs.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/main.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
@@ -416,13 +430,6 @@
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bs.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="9" column="14" selection-start-line="9" selection-start-column="14" selection-end-line="9" selection-end-column="14" />
         </state>
       </provider>
     </entry>
@@ -435,8 +442,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/guiform.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="247">
-          <caret line="55" column="39" selection-start-line="55" selection-start-column="39" selection-end-line="55" selection-end-column="39" />
+        <state relative-caret-position="511">
+          <caret line="87" column="22" lean-forward="true" selection-start-line="87" selection-start-column="22" selection-end-line="87" selection-end-column="22" />
           <folding>
             <element signature="e#0#9#0" expanded="true" />
           </folding>

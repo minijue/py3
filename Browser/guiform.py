@@ -54,22 +54,38 @@ class ExcelFrame(wx.Frame):
         wx.Frame.__init__(self, parent=superior, id=wx.ID_ANY, title=u'从Excel文件导入', pos=(700, 400), \
                           size=(450, 160),
                           style=wx.DEFAULT_FRAME_STYLE ^ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
+        self.Bind(wx.EVT_CLOSE, self.onClose)
 
         panel = wx.Panel(self, -1)
 
         self.label1 = wx.StaticText(panel, -1, u'请选择 Excel 文件路径：', pos=(30, 30))
-        self.pathtext = wx.TextCtrl(panel, -1, "", pos=(170, 25), size=(170, 25), style=wx.TE_LEFT)
+        self.pathText = wx.TextCtrl(panel, -1, "", pos=(170, 25), size=(170, 25), style=wx.TE_LEFT)
         self.btnBrowse = wx.Button(panel, -1, "...", pos=(350, 25), size=(50, 25))
         self.Bind(wx.EVT_BUTTON, self.onBtnBrowse, self.btnBrowse)
+
+        self.buttonOK = wx.Button(panel, -1, u"确定", pos=(120, 76))
+        self.Bind(wx.EVT_BUTTON, self.onButtonOK, self.buttonOK)
+
+        self.buttonCancel = wx.Button(panel, -1, u"取消", pos=(220, 76))
+        self.Bind(wx.EVT_BUTTON, self.onButtonCancel, self.buttonCancel)
+
+    def onClose(self, event):
+        aw.browser.quit()
+        self.Parent.Destroy()
+        self.Destroy()
 
     def onBtnBrowse(self, event):
         wildcard = 'Excel 文件(*.xlsx; *.xls)|*.xlsx; *.xls'
         with wx.FileDialog(self, "Open XYZ file", wildcard, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
             if fileDialog.ShowModal() == wx.ID_OK:
-                self.pathtext.SetValue(self.path)
+                self.pathText.SetValue(self.path)
 
-    def onScaleSelected(self, event):
+    def onButtonOK(self, event):
         pass
+
+    def onButtonCancel(self, event):
+        self.Parent.Show(True)
+        self.Destroy()
 
 
 class MannulFrame(wx.Frame):
@@ -77,6 +93,7 @@ class MannulFrame(wx.Frame):
         wx.Frame.__init__(self, parent=superior, id=wx.ID_ANY, title=u'选择班级', pos=(700, 400), \
                           size=(450, 220),
                           style=wx.DEFAULT_FRAME_STYLE ^ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
+        self.Bind(wx.EVT_CLOSE, self.onClose)
 
         panel = wx.Panel(self, -1)
 
@@ -166,6 +183,8 @@ class PasteFrame(wx.Frame):
         wx.Frame.__init__(self, parent=superior, id=wx.ID_ANY, title=u'手动粘贴成绩', pos=(700, 400), \
                           size=(450, 250),
                           style=wx.DEFAULT_FRAME_STYLE ^ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
+        self.Bind(wx.EVT_CLOSE, self.onClose)
+
         self.isNorm = isNorm
         self.scores = {'百分制': 'score', '两级分制': 'twoTypescore', '五级分制': 'fiveTypescore'}
         panel = wx.Panel(self, -1)
