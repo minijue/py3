@@ -33,7 +33,8 @@ class MainFrame(wx.Frame):
 
         if self.radio1.GetValue():
             # To Do: 自动从 Excel 文件导入
-            pass
+            fr = ExcelFrame(self)
+            fr.Show(True)
         else:
             # 手动
             tlst = aw.getterms()
@@ -46,6 +47,29 @@ class MainFrame(wx.Frame):
 
     def onButtonCancel(self, event):
         self.onClose(event)
+
+
+class ExcelFrame(wx.Frame):
+    def __init__(self, superior):
+        wx.Frame.__init__(self, parent=superior, id=wx.ID_ANY, title=u'从Excel文件导入', pos=(700, 400), \
+                          size=(450, 160),
+                          style=wx.DEFAULT_FRAME_STYLE ^ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
+
+        panel = wx.Panel(self, -1)
+
+        self.label1 = wx.StaticText(panel, -1, u'请选择 Excel 文件路径：', pos=(30, 30))
+        self.pathtext = wx.TextCtrl(panel, -1, "", pos=(170, 25), size=(170, 25), style=wx.TE_LEFT)
+        self.btnBrowse = wx.Button(panel, -1, "...", pos=(350, 25), size=(50, 25))
+        self.Bind(wx.EVT_BUTTON, self.onBtnBrowse, self.btnBrowse)
+
+    def onBtnBrowse(self, event):
+        wildcard = 'Excel 文件(*.xlsx; *.xls)|*.xlsx; *.xls'
+        with wx.FileDialog(self, "Open XYZ file", wildcard, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
+            if fileDialog.ShowModal() == wx.ID_OK:
+                self.pathtext.SetValue(self.path)
+
+    def onScaleSelected(self, event):
+        pass
 
 
 class MannulFrame(wx.Frame):

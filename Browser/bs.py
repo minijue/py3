@@ -15,30 +15,29 @@ class AutoWeb:
         self.__browser.maximize_window()
 
         self.__browser.get('http://portal.ecjtu.edu.cn:8080/form/forward.action?path=/portal/portal&p=hjdHome#sd=1012')
-        try:
-            usr = self.__browser.find_element_by_name('username')
-            pwd = self.__browser.find_element_by_name('password')
-            with open('user.txt', 'r') as uf:
-                uname = uf.readline()
-                upwd = uf.readline()
-                usr.send_keys(uname)
-                pwd.send_keys(upwd)
+        self.__browser.implicitly_wait(10)
 
-            btn = self.__browser.find_element_by_class_name('login_box_landing_btn')
-            btn.click()
+        usr = self.__browser.find_element_by_name('username')
+        pwd = self.__browser.find_element_by_name('password')
+        with open('user.txt', 'r') as uf:
+            uname = uf.readline()
+            upwd = uf.readline()
+            usr.send_keys(uname)
+            pwd.send_keys(upwd)
 
-            self.__browser.implicitly_wait(10)
+        btn = self.__browser.find_element_by_class_name('login_box_landing_btn')
+        btn.click()
 
-            app_one = self.__browser.find_element_by_link_text(u'教务综合管理系统')
-            app_one.click()
+        self.__browser.implicitly_wait(10)
 
-            window = self.__browser.window_handles
-            self.__browser.switch_to.window(window[-1])
+        app_one = self.__browser.find_element_by_link_text(u'教务综合管理系统')
+        app_one.click()
 
-            score = self.__browser.find_element_by_xpath("//li[@class='score']")
-            score.click()
-        except:
-            print("element not found.")
+        window = self.__browser.window_handles
+        self.__browser.switch_to.window(window[-1])
+
+        score = self.__browser.find_element_by_xpath("//li[@class='score']")
+        score.click()
 
     def getterms(self):  # 获取所有的学期数据
         try:
