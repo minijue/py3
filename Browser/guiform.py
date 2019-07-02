@@ -9,6 +9,7 @@ import readexcel as rxl
 aw = bs.AutoWeb()
 
 
+# 自动录入平时成绩
 def AutoNorm(ef):
     cs = ef.getClasses()
     global clst
@@ -40,6 +41,7 @@ def AutoNorm(ef):
             clst = aw.getClasses()
 
 
+# 自动录入考核成绩
 def AutoExam(ef):
     cs = ef.getClasses()
     global clst
@@ -137,8 +139,8 @@ class ExcelFrame(wx.Frame):
         self.Destroy()
 
     def onBtnBrowse(self, event):
-        wildcard = 'Excel 文件(*.xlsx)|*.xlsx'
-        with wx.FileDialog(self, "Open XYZ file", wildcard, style=wx.FD_OPEN | wx.FD_FILE_MUST_EXIST) as fileDialog:
+        wildcard = u"Excel 文件 (*.xlsx, *.xls)|*.xlsx;*.xls|All files (*.*)|*.*"
+        with wx.FileDialog(self, "打开成绩文件", wildcard=wildcard, style=wx.FD_OPEN) as fileDialog:
             if fileDialog.ShowModal() == wx.ID_OK:
                 self.pathText.SetValue(fileDialog.GetPath())
 
