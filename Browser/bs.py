@@ -9,9 +9,7 @@ if __name__ == '__main__':
 
 class AutoWeb:
     def __init__(self):
-        self.__browser = webdriver.Chrome(
-            executable_path=r'C:\Users\jue95\AppData\Local\Google\Chrome\Application\chromedriver.exe')  # for Windows
-        # self.__browser = webdriver.Chrome()
+        self.__browser = webdriver.Chrome()
         self.__browser.maximize_window()
 
         self.__browser.get('http://portal.ecjtu.edu.cn:8080/form/forward.action?path=/portal/portal&p=hjdHome#sd=1012')
@@ -172,26 +170,26 @@ class MyThread(Thread):  # 后台线程完成班级选择页面的解析
                             while j < len(ctr_list):
                                 ctrx = ctr_list[j]
                                 cattr = ctrx.get_attribute('class')
-                                if cattr is not None:
-                                    ctd_list = ctrx.find_elements_by_tag_name('td')
-                                    # 列表，依次包括小班名称，平时成绩链接，考核成绩链接
-                                    tdl = []
+                                # if cattr is not None:
+                                ctd_list = ctrx.find_elements_by_tag_name('td')
+                                # 列表，依次包括小班名称，平时成绩链接，考核成绩链接
+                                tdl = []
 
-                                    if cattr == 'finish':  # 录入已完成，权限已关闭，仅可查看
+                                if cattr == 'finish':  # 录入已完成，权限已关闭，仅可查看
+                                    norm = exam = ctd_list[5].find_element_by_tag_name('a')
+                                else:  # 录入权限开放
+                                    if u'已录入' in ctd_list[3].text or u'修改' in ctd_list[3].text:
+                                        norm = None
+                                    else:
+                                        norm = ctd_list[3].find_element_by_tag_name('a')
+
+                                    if u'已录入' in ctd_list[4].text:
+                                        exam = None
+                                    else:
+                                        exam = ctd_list[4].find_element_by_tag_name('a')
+
+                                    if norm == exam is None:
                                         norm = exam = ctd_list[5].find_element_by_tag_name('a')
-                                    else:  # 录入权限开放
-                                        if u'已录入' in ctd_list[3].text or u'修改' in ctd_list[3].text:
-                                            norm = None
-                                        else:
-                                            norm = ctd_list[3].find_element_by_tag_name('a')
-
-                                        if u'已录入' in ctd_list[4].text:
-                                            exam = None
-                                        else:
-                                            exam = ctd_list[4].find_element_by_tag_name('a')
-
-                                        if norm == exam is None:  # 录入已完成，仅可查看
-                                            norm = exam = ctd_list[5].find_element_by_tag_name('a')
 
                                     # else:
                                     #     norm = exam = None

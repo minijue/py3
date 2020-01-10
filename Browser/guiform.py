@@ -16,7 +16,7 @@ def AutoNorm(ef):
 
     cNames = ef.getClassNames()
     for c in cNames:
-        ckey = c[:c.find(')') + 1]
+        ckey = c[:c.rfind(')') + 1]
         ci = cs.__next__()
 
         sclass = clst[ckey]
@@ -49,7 +49,7 @@ def AutoExam(ef):
     clst = aw.getClasses()
 
     for c in ef.getClassNames():
-        ckey = c[:c.find(')') + 1]
+        ckey = c[:c.rfind(')') + 1]
         ci = cs.__next__()
 
         sclass = clst[ckey]
