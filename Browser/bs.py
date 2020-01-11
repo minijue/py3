@@ -71,6 +71,19 @@ class AutoWeb:
             s = s[:i + 3]
         etd.send_keys(s)
 
+    def sendOptionByValue(self, name, selection):
+        try:
+            strxpath = f"//input[@value='{name}']"
+            ctl = self.__browser.find_element_by_xpath(strxpath)
+            nname = ctl.get_attribute('name')
+            nname = nname[:nname.find('.')]
+            nname = nname + '.fiveTypeScore'
+
+            etd = self.__browser.find_element_by_xpath(f"//select[@name='{nname}']")
+            Select(etd).select_by_visible_text(selection)
+        except:
+            print(f"AutoWeb.selectCombo: element {name} not found.")
+
     def selectCombo(self, index):  # 自动选择学期列表
         try:
             select = self.__browser.find_element_by_xpath("//select[@id='m-term']")

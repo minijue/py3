@@ -8,38 +8,41 @@ import readexcel as rxl
 
 aw = bs.AutoWeb()
 
+hasnorm = True
 
 # 自动录入平时成绩
 def AutoNorm(ef):
+    global hasnorm
     cs = ef.getClasses()
     clst = aw.getClasses()
 
-    cNames = ef.getClassNames()
-    for c in cNames:
-        ckey = c[:c.rfind(')') + 1]
-        ci = cs.__next__()
-
+    for ckey in clst:
         sclass = clst[ckey]
-        ci.norm = sclass[c][0]
-        if ci.norm is not None:
-            aw.openlink(ahref=ci.norm)
-            # 设置平时成绩比例
-            aw.setOptionByName("commonScale", ci.scale)
+        for c in sclass:
+            ci = cs.__next__()
 
-            # 逐个录入成绩
             sos = ci.GetStudents()
-            for cn in sos:
-                aw.sendTextByName(cn, sos[cn][0], "norm")
+            if list(sos.values())[0][0] is not None:
+                ci.norm = sclass[c][0]
+                aw.openlink(ahref=ci.norm)
+                # 设置平时成绩比例
+                aw.setOptionByName("commonScale", ci.scale)
 
-            # 临时保存并返回
-            try:
-                aw.browser.find_element_by_class_name('temp-save').click()
-                # time.sleep(5)
-            except:
-                pass
-            aw.openlink(None)
-            # aw.browser.find_element_by_class_name('back').click()
-            clst = aw.getClasses()
+                # 逐个录入成绩
+                for cn in sos:
+                    aw.sendTextByName(cn, sos[cn][0], "norm")
+
+                # 临时保存并返回
+                try:
+                    aw.browser.find_element_by_class_name('temp-save').click()
+                    # time.sleep(5)
+                except:
+                    pass
+                aw.openlink(None)
+                # aw.browser.find_element_by_class_name('back').click()
+                clst = aw.getClasses()
+            else:
+                hasnorm = False
 
 
 # 自动录入考核成绩
@@ -48,32 +51,44 @@ def AutoExam(ef):
     aw.browser.refresh()
     clst = aw.getClasses()
 
-    for c in ef.getClassNames():
-        ckey = c[:c.rfind(')') + 1]
-        ci = cs.__next__()
-
+    for ckey in clst:
         sclass = clst[ckey]
-        ci.norm = sclass[c][0]
-        if ci.norm is not None:
-            if wx.MessageDialog(None, u"请先提交所有班级平时成绩后再录入考核成绩！", u"考核成绩",
-                                wx.OK | wx.ICON_QUESTION).ShowModal() == wx.ID_OK:
-                sys.exit()
-            break
-        ci.exam = sclass[c][1]
-        if ci.exam is not None:
-            aw.openlink(ahref=ci.exam)
+        for c in sclass:
+            ci = cs.__next__()
 
-            # 逐个录入成绩
-            sos = ci.GetStudents()
-            for cn in sos:
-                aw.sendTextByName(cn, sos[cn][1], "exam")
+            ci.norm = sclass[c][0]
+            if ci.norm is not None and hasnorm:
+                if wx.MessageDialog(None, u"请先提交所有班级平时成绩后再录入考核成绩！", u"考核成绩",
+                                    wx.OK | wx.ICON_QUESTION).ShowModal() == wx.ID_OK:
+                    sys.exit()
+                break
+            ci.exam = sclass[c][1]
+            if ci.exam is not None:
+                aw.openlink(ahref=ci.exam)
+                sos = ci.GetStudents()
+                if not hasnorm:
+                    if (None, '中等') in sos.values():
+                        scores = 'fiveTypescore'
+                    else:
+                        scores = 'score'
+                    score = aw.browser.find_element_by_id(scores)
+                    score.click()
 
-            # 临时保存并返回
-            aw.browser.find_element_by_class_name('temp-save').click()
-            # time.sleep(5)
-            # aw.browser.find_element_by_class_name('back').click()
-            aw.openlink(None)
-            clst = aw.getClasses()
+                # 逐个录入成绩
+                for cn in sos:
+                    if hasnorm:
+                        aw.sendTextByName(cn, sos[cn][1], "exam")
+                    else:
+                        aw.sendOptionByValue(cn, sos[cn][1])
+
+                # 临时保存并返回
+                aw.browser.find_element_by_class_name('temp-save').click()
+                # time.sleep(5)
+                # aw.browser.find_element_by_class_name('back').click()
+                aw.openlink(None)
+                if not hasnorm:
+                    aw.openlink(None)
+                clst = aw.getClasses()
 
 
 class MainFrame(wx.Frame):
