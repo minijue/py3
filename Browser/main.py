@@ -1,5 +1,4 @@
 import wx
-
 import guiform
 
 if __name__ == '__main__':

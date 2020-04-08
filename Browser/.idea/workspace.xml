@@ -3,8 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="47e7721f-a429-4fea-afae-7bbbc7229281" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bs.py" beforeDir="false" afterPath="$PROJECT_DIR$/bs.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/guiform.py" beforeDir="false" afterPath="$PROJECT_DIR$/guiform.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +53,10 @@
   </component>
   <component name="PropertiesComponent">
     <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../calstudy" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RunManager" selected="Python.main">
@@ -111,9 +111,9 @@
       <envs>
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
-      <option name="SDK_HOME" value="" />
+      <option name="SDK_HOME" value="$USER_HOME$/App/Python3/bin/python3" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="IS_MODULE_SDK" value="true" />
+      <option name="IS_MODULE_SDK" value="false" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
@@ -148,6 +148,12 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <list>
+      <item itemvalue="Python.bs" />
+      <item itemvalue="Python.guiform" />
+      <item itemvalue="Python.main" />
+      <item itemvalue="Python.toList" />
+    </list>
     <recent_temporary>
       <list>
         <item itemvalue="Python.main" />
@@ -201,6 +207,13 @@
       <workItem from="1578717435262" duration="215000" />
       <workItem from="1578747783753" duration="10330000" />
       <workItem from="1578758560465" duration="281000" />
+      <workItem from="1579159339722" duration="19000" />
+      <workItem from="1579159375391" duration="286000" />
+      <workItem from="1579159689282" duration="128000" />
+      <workItem from="1579159931356" duration="319000" />
+      <workItem from="1584285960919" duration="133000" />
+      <workItem from="1586312804900" duration="299000" />
+      <workItem from="1586313207635" duration="50000" />
     </task>
     <task id="LOCAL-00001" summary="1. 图形界面&#10;2. 粘贴界面&#10;3. 粘贴字符串转换为数字列表">
       <created>1550468635292</created>
@@ -318,6 +331,19 @@
   <component name="UpdateCopyrightCheckinHandler">
     <option name="UPDATE_COPYRIGHT" value="true" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="CHECK_CODE_CLEANUP_BEFORE_PROJECT_COMMIT" value="true" />
@@ -342,18 +368,20 @@
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1578583971851">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="414" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1584286046280">
+      <screen x="0" y="28" width="1920" height="1017" />
     </state>
     <state x="414" y="175" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1578583971851" />
+    <state x="414" y="189" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.28.1920.1017@0.28.1920.1017" timestamp="1584286046280" />
     <state x="560" y="92" key="CommitChangelistDialog2" timestamp="1578633238780">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="560" y="92" key="CommitChangelistDialog2/0.0.1920.1040@0.0.1920.1040" timestamp="1578633238780" />
-    <state x="815" y="301" key="FileChooserDialogImpl" timestamp="1578584906317">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="815" y="312" width="424" height="501" key="FileChooserDialogImpl" timestamp="1586313255537">
+      <screen x="0" y="27" width="1920" height="1019" />
     </state>
     <state x="815" y="301" key="FileChooserDialogImpl/0.0.1920.1040@0.0.1920.1040" timestamp="1578584906317" />
+    <state x="815" y="312" width="424" height="501" key="FileChooserDialogImpl/0.27.1920.1019@0.27.1920.1019" timestamp="1586313255537" />
     <state width="1877" height="247" key="GridCell.Tab.0.bottom" timestamp="1578758587065">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
