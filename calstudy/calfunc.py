@@ -46,13 +46,13 @@ def ranmul(t):
 def randiv(t):
     global n0
     a = random.randint(1, 9)
-    b = random.randint(0, 99)
+    b = random.randint(2 * a, 999)
     while (a == 1 or b < 2) and n0 > t:  # 次数超过限制
         a = random.randint(1, 9)
-        b = random.randint(0, 999)
-    if a == 1 or b < 2:
+        b = random.randint(2 * a, 999)
+    if a == 1:
         n0 += 1
-    c = a * b
-    if c != 0 and a > 1:
-        c += random.choice(range(0, a - 1))
-    return f'{c} ÷ {a} ='
+    # c = a * b
+    # if c != 0 and a > 1:
+    #     c += random.choice(range(0, a - 1))
+    return f'{b} ÷ {a} ='
