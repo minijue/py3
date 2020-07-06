@@ -17,32 +17,35 @@ def AutoNorm(ef):
     clst = aw.getClasses()
 
     for ckey in clst:
-        sclass = clst[ckey]
-        for c in sclass:
-            ci = cs.__next__()
+        if '课程设计' not in ckey:
+            sclass = clst[ckey]
+            for c in sclass:
+                ci = cs.__next__()
 
-            sos = ci.GetStudents()
-            if list(sos.values())[0][0] is not None:
-                ci.norm = sclass[c][0]
-                aw.openlink(ahref=ci.norm)
-                # 设置平时成绩比例
-                aw.setOptionByName("commonScale", ci.scale)
+                sos = ci.GetStudents()
+                if list(sos.values())[0][0] is not None:
+                    ci.norm = sclass[c][0]
+                    if ci.norm is not None:
+                        aw.openlink(ahref=ci.norm)
+                        # 设置平时成绩比例
+                        aw.setOptionByName("commonScale", ci.scale)
 
-                # 逐个录入成绩
-                for cn in sos:
-                    aw.sendTextByName(cn, sos[cn][0], "norm")
+                        # 逐个录入成绩
+                        for cn in sos:
+                            aw.sendTextByName(cn, sos[cn][0], "norm")
 
-                # 临时保存并返回
-                try:
-                    aw.browser.find_element_by_class_name('temp-save').click()
-                    # time.sleep(5)
-                except:
-                    pass
-                aw.openlink(None)
-                # aw.browser.find_element_by_class_name('back').click()
-                clst = aw.getClasses()
-            else:
-                hasnorm = False
+                        # 临时保存并返回
+                        try:
+                            aw.browser.find_element_by_class_name('temp-save').click()
+                            # time.sleep(5)
+                        except:
+                            pass
+                        aw.openlink(None)
+                        # aw.browser.find_element_by_class_name('back').click()
+                        clst = aw.getClasses()
+                        sclass = clst[ckey]
+                else:
+                    hasnorm = False
 
 
 # 自动录入考核成绩
@@ -52,43 +55,45 @@ def AutoExam(ef):
     clst = aw.getClasses()
 
     for ckey in clst:
-        sclass = clst[ckey]
-        for c in sclass:
-            ci = cs.__next__()
+        if '课程设计' not in ckey:
+            sclass = clst[ckey]
+            for c in sclass:
+                ci = cs.__next__()
 
-            ci.norm = sclass[c][0]
-            if ci.norm is not None and hasnorm:
-                if wx.MessageDialog(None, u"请先提交所有班级平时成绩后再录入考核成绩！", u"考核成绩",
-                                    wx.OK | wx.ICON_QUESTION).ShowModal() == wx.ID_OK:
-                    sys.exit()
-                break
-            ci.exam = sclass[c][1]
-            if ci.exam is not None:
-                aw.openlink(ahref=ci.exam)
-                sos = ci.GetStudents()
-                if not hasnorm:
-                    if (None, '中等') in sos.values():
-                        scores = 'fiveTypescore'
-                    else:
-                        scores = 'score'
-                    score = aw.browser.find_element_by_id(scores)
-                    score.click()
+                ci.norm = sclass[c][0]
+                if ci.norm is not None and hasnorm:
+                    if wx.MessageDialog(None, u"请先提交所有班级平时成绩后再录入考核成绩！", u"考核成绩",
+                                        wx.OK | wx.ICON_QUESTION).ShowModal() == wx.ID_OK:
+                        sys.exit()
+                    break
+                ci.exam = sclass[c][1]
+                if ci.exam is not None:
+                    aw.openlink(ahref=ci.exam)
+                    sos = ci.GetStudents()
+                    if not hasnorm:
+                        if (None, '中等') in sos.values():
+                            scores = 'fiveTypescore'
+                        else:
+                            scores = 'score'
+                        score = aw.browser.find_element_by_id(scores)
+                        score.click()
 
-                # 逐个录入成绩
-                for cn in sos:
-                    if hasnorm:
-                        aw.sendTextByName(cn, sos[cn][1], "exam")
-                    else:
-                        aw.sendOptionByValue(cn, sos[cn][1])
+                    # 逐个录入成绩
+                    for cn in sos:
+                        if hasnorm:
+                            aw.sendTextByName(cn, sos[cn][1], "exam")
+                        else:
+                            aw.sendOptionByValue(cn, sos[cn][1])
 
-                # 临时保存并返回
-                aw.browser.find_element_by_class_name('temp-save').click()
-                # time.sleep(5)
-                # aw.browser.find_element_by_class_name('back').click()
-                aw.openlink(None)
-                if not hasnorm:
+                    # 临时保存并返回
+                    aw.browser.find_element_by_class_name('temp-save').click()
+                    # time.sleep(5)
+                    # aw.browser.find_element_by_class_name('back').click()
                     aw.openlink(None)
-                clst = aw.getClasses()
+                    if not hasnorm:
+                        aw.openlink(None)
+                    clst = aw.getClasses()
+                    sclass = clst[ckey]
 
 
 class MainFrame(wx.Frame):
@@ -358,7 +363,9 @@ class PasteFrame(wx.Frame):
 
     def onButtonOK(self, event):
         txt = self.text.GetValue()
-        if self.combo.GetStringSelection() in list(self.scores.keys):
+        sel = self.combo.GetStringSelection()
+        type = list(self.scores.keys())
+        if sel in type:
             aw.executejs(txt, 'total')  # 直接录入总评成绩
         else:
             aw.executejs(txt, self.isNorm)
