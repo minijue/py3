@@ -42,10 +42,14 @@ def AutoNorm(ef):
                             pass
                         aw.openlink(None)
                         # aw.browser.find_element_by_class_name('back').click()
+
+                        # 刷新数据
                         clst = aw.getClasses()
                         sclass = clst[ckey]
                 else:
                     hasnorm = False
+        else:
+            hasnorm = False
 
 
 # 自动录入考核成绩
@@ -55,51 +59,52 @@ def AutoExam(ef):
     clst = aw.getClasses()
 
     for ckey in clst:
-        if '课程设计' not in ckey:
-            sclass = clst[ckey]
-            for c in sclass:
-                ci = cs.__next__()
+        sclass = clst[ckey]
+        for c in sclass:
+            ci = cs.__next__()
 
-                ci.norm = sclass[c][0]
-                if ci.norm is not None and hasnorm:
-                    if wx.MessageDialog(None, u"请先提交所有班级平时成绩后再录入考核成绩！", u"考核成绩",
-                                        wx.OK | wx.ICON_QUESTION).ShowModal() == wx.ID_OK:
-                        sys.exit()
-                    break
-                ci.exam = sclass[c][1]
-                if ci.exam is not None:
-                    aw.openlink(ahref=ci.exam)
-                    sos = ci.GetStudents()
-                    if not hasnorm:
-                        if (None, '中等') in sos.values():
-                            scores = 'fiveTypescore'
-                        else:
-                            scores = 'score'
-                        score = aw.browser.find_element_by_id(scores)
-                        score.click()
+            ci.norm = sclass[c][0]
+            if ci.norm is not None and hasnorm:
+                if wx.MessageDialog(None, u"请先提交所有班级平时成绩后再录入考核成绩！", u"考核成绩",
+                                    wx.OK | wx.ICON_QUESTION).ShowModal() == wx.ID_OK:
+                    sys.exit()
+                break
+            ci.exam = sclass[c][1]
+            if ci.exam is not None:
+                aw.openlink(ahref=ci.exam)
+                sos = ci.GetStudents()
+                if not hasnorm:
+                    if (None, '中等') in sos.values():
+                        scores = 'fiveTypescore'
+                    else:
+                        scores = 'score'
+                    score = aw.browser.find_element_by_id(scores)
+                    score.click()
 
-                    # 逐个录入成绩
-                    for cn in sos:
-                        if hasnorm:
-                            aw.sendTextByName(cn, sos[cn][1], "exam")
-                        else:
-                            aw.sendOptionByValue(cn, sos[cn][1])
+                # 逐个录入成绩
+                for cn in sos:
+                    if hasnorm:
+                        aw.sendTextByName(cn, sos[cn][1], "exam")
+                    else:
+                        aw.sendOptionByValue(cn, sos[cn][1])
 
-                    # 临时保存并返回
-                    aw.browser.find_element_by_class_name('temp-save').click()
-                    # time.sleep(5)
-                    # aw.browser.find_element_by_class_name('back').click()
+                # 临时保存并返回
+                aw.browser.find_element_by_class_name('temp-save').click()
+                # time.sleep(5)
+                # aw.browser.find_element_by_class_name('back').click()
+                aw.openlink(None)
+                if not hasnorm:
                     aw.openlink(None)
-                    if not hasnorm:
-                        aw.openlink(None)
-                    clst = aw.getClasses()
-                    sclass = clst[ckey]
+
+                # 刷新数据
+                clst = aw.getClasses()
+                sclass = clst[ckey]
 
 
 class MainFrame(wx.Frame):
     def __init__(self, superior):
 
-        wx.Frame.__init__(self, parent=superior, id=wx.ID_ANY, title=u'华东交通大学 - 成绩自动录入', pos=(700, 400), \
+        wx.Frame.__init__(self, parent=superior, id=wx.ID_ANY, title=u'华东交通大学 - 成绩自动录入', pos=(700, 400),
                           size=(370, 220),
                           style=wx.DEFAULT_FRAME_STYLE ^ (wx.RESIZE_BORDER | wx.MAXIMIZE_BOX))
         self.Bind(wx.EVT_CLOSE, self.onClose)

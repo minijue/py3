@@ -34,7 +34,12 @@ class ExcelFile():
             ws = self.wb[name]
             # 获取平时成绩比例
             d1 = self.wb[name]['D1']
-            cs.scale = d1.value[-3:]
+            if d1.value is not None:
+                if d1.data_type == 's':
+                    i = d1.value.find('：')
+                    cs.scale = d1.value[i + 1:]
+                elif d1.data_type == 'n':
+                    cs.scale = str(d1.value * 100) + '%'
 
             nColumn, eColumn = 0, 0
 
@@ -53,7 +58,11 @@ class ExcelFile():
             # 获取平时成绩和考核成绩
             for j in range(3, 60):
                 na = ws.cell(row=j, column=2)
-                cn = ws.cell(row=j, column=nColumn)
+                if nColumn > 0:
+                    cn = ws.cell(row=j, column=nColumn)
+                else:
+                    cn = ws.cell(row=j, column=1)
+                    cn.value = None
                 ce = ws.cell(row=j, column=eColumn)
 
                 if na.value is None:
